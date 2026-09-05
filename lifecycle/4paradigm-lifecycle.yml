@@ -1,0 +1,86 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://openmldb.ai/docs/en/main/maintain/upgrade.html, https://openmldb.ai/docs/en/main/about/index.html,
+  https://github.com/4paradigm/OpenMLDB/releases, https://openmldb.ai/docs/en/main/ (version switcher),
+  https://motus.phanthy.com/en/updates and https://github.com/4paradigm/openaios-platform — all fetched
+  or queried 2026-09-05; plus the operations declared in openapi/ and grpc/
+name: 4Paradigm API lifecycle
+summary: >-
+  No deprecation policy, no sunset policy, no SLA and no status page exist for any 4Paradigm surface.
+  Nothing is self-hosted-with-a-vendor-promise here: the operator runs the software and carries the
+  availability risk, which is coherent — but it also means an integrator has nothing to plan against
+  except release cadence, and the release cadence of two of the three products is zero.
+versioning:
+  policy_published: false
+  scheme: semantic versioning on OpenMLDB releases; date+sha image tags on PhanthyMotus; 0.0.x
+    OpenAPI info.version on OpenAIOS-Platform
+  docs: https://openmldb.ai/docs/en/main/maintain/upgrade.html
+  note: >-
+    The OpenMLDB documentation site keeps every minor line back to v0.4 online (/docs/en/v0.4/ …
+    /docs/en/v0.9/, plus main), which is the closest thing 4Paradigm publishes to a version-support
+    statement — and it is documentation retention, not a support commitment.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    Not one of the 57 published REST operations carries `deprecated: true`, and no Sunset or Deprecation
+    response header is declared or documented anywhere. The only lifecycle signal in the contracts is
+    the informal "[Alpha]" prefix the OpenMLDB docs put on the Go SDK, the C++ SDK, the Kubernetes
+    backends and the cross-datacenter disaster-recovery feature.
+alpha_and_experimental:
+- feature: OpenMLDB Go SDK
+  status: alpha
+  evidence: https://openmldb.ai/docs/en/main/quickstart/sdk/go_sdk.html
+- feature: OpenMLDB C++ SDK
+  status: alpha
+  evidence: https://openmldb.ai/docs/en/main/quickstart/sdk/cxx_sdk.html
+- feature: Server-side authentication
+  status: alpha, disabled by default
+  evidence: https://openmldb.ai/docs/en/main/deploy/auth.html
+- feature: Offline engine on Kubernetes; online engine on Kubernetes
+  status: alpha
+  evidence: https://openmldb.ai/docs/en/main/deploy/offline_integrate_kubernetes.html
+- feature: Cross-datacenter disaster recovery
+  status: alpha
+  evidence: https://openmldb.ai/docs/en/main/maintain/multi_cluster.html
+- feature: OpenMLDB APIServer (the whole REST surface)
+  status: not recommended for production
+  evidence: >-
+    https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html — "APIServer is mainly used for
+    functional testing, not recommended for performance testing, nor recommended for the production
+    environment. The default deployment of APIServer does not have a high availability mechanism".
+    The provider deprecating its own REST surface for production use is the single most important
+    lifecycle fact in this record.
+status_page:
+  published: false
+  note: >-
+    No status.4paradigm.com, no statuspage.io tenant, no incident history. There is nothing hosted to
+    have a status page for.
+sla:
+  published: false
+support:
+  channels:
+  - GitHub issues on each project repository
+  - OpenMLDB community page — https://openmldb.ai/docs/en/main/about/community.html
+  - business@4paradigm.com (commercial), pr_co@4paradigm.com (media), ir@4paradigm.com (investors)
+  - '+86.400.898.7788'
+maintenance_state:
+  openmldb:
+    state: slowing
+    last_release: '2025-02-21'
+    last_commit: '2026-09-01'
+    note: Commits continue on main; no tagged release for 18 months.
+  openaios_platform:
+    state: dormant
+    last_commit: '2021-08-20'
+    note: >-
+      The repository that carries the only OpenAPI contracts in this record has not been touched since
+      2021. The contracts are real and first-party; they describe software that is no longer maintained.
+  phanthymotus:
+    state: active
+    last_commit: '2026-09-05'
+    note: Daily image builds, near-daily changelog entries, an expanding hardware ecosystem.

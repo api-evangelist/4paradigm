@@ -1,0 +1,228 @@
+generated: '2026-09-05'
+method: probed
+source: direct HTTPS probe of every host in this record on 2026-09-05
+name: 4Paradigm /.well-known probe
+result: none served
+note: Not one host serves a real /.well-known document. www.4paradigm.com and apps.4paradigm.com answer
+  200 with an HTML catch-all for EVERY path — including /openapi.json and /llms.txt — so those 200s are
+  soft-404s, not documents, and no WellKnown or SecurityTxt pointer is emitted for them. 4paradigm.com,
+  en.4paradigm.com, ir.4paradigm.com, phanthy.com and motus.phanthy.com return honest 404s. openmldb.ai
+  returns 500 at its document root (the Sphinx docs live only under /docs/) so every well-known path there
+  500s too.
+hosts:
+- host: www.4paradigm.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+- host: 4paradigm.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+- host: en.4paradigm.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+- host: apps.4paradigm.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    result: 'soft-404: HTML shell returned for a non-HTML document path; not a served document'
+    content_type: text/html
+- host: ir.4paradigm.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html
+- host: openmldb.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 500
+    file: null
+    result: absent
+    content_type: text/html; charset=UTF-8
+  - path: /.well-known/openid-configuration
+    status: 500
+    file: null
+    result: absent
+    content_type: text/html; charset=UTF-8
+  - path: /.well-known/oauth-authorization-server
+    status: 500
+    file: null
+    result: absent
+    content_type: text/html; charset=UTF-8
+  - path: /.well-known/api-catalog
+    status: 500
+    file: null
+    result: absent
+    content_type: text/html; charset=UTF-8
+  - path: /.well-known/ai-plugin.json
+    status: 500
+    file: null
+    result: absent
+    content_type: text/html; charset=UTF-8
+- host: motus.phanthy.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+- host: phanthy.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    result: absent
+    content_type: text/html; charset=utf-8

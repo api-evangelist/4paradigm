@@ -1,0 +1,1590 @@
+generated: '2026-09-05'
+method: derived
+source: derived from mcp/4paradigm-mcp.yml (16 published driver.yaml manifests) and the four OpenAPI 3.0.3
+  specs in openapi/ (openaios-platform)
+name: 4Paradigm MCP tool to REST operation crosswalk
+summary: 'The crosswalk is deliberately EMPTY, and that is the finding. 4Paradigm publishes an MCP surface
+  and an OpenAPI surface, but they belong to two unrelated products: the MCP cards are PhanthyMotus robot
+  hardware capabilities, and the OpenAPI operations are OpenAIOS-Platform Kubernetes/AI-platform management
+  calls. No card is backed by a published REST operation, and no operation is exposed as a tool. Nothing
+  was mapped by name similarity — a binding invented across two different products would be worse than
+  none.'
+surfaces:
+  openapi:
+  - file: openapi/4paradigm-openaios-billing.yaml
+    gated: false
+  - file: openapi/4paradigm-openaios-platform-internal.yaml
+    gated: false
+  - file: openapi/4paradigm-openaios-platform.yaml
+    gated: false
+  - file: openapi/4paradigm-openaios-webterminal.yaml
+    gated: false
+  graphql: null
+  mcp:
+    url: http://localhost:<port>/mcp per driver bundle
+    gated: true
+    note: self-hosted; live tools/list requires the driver container and its hardware to be running, so
+      per-tool inputSchemas could not be introspected
+crosswalk: []
+mcp_only:
+- tool: agibot-x2-driver.mc_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.joint_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.hand_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.camera_rgb
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.camera_depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.lidar
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.slam_pose
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.system_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.linkcraft_catalog
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.mc_mode
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.locomotion
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.preset_motion
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.joint_command
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.hand_command
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.linkcraft
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.pmu_led
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.tts
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.emoji
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.mic_source
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.slam_control
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: agibot-x2-driver.map_get
+  category: processor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.odom
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.fall_down_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.camera
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.upper_body
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.action
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: booster-k1-driver.audio
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: brainco-revo2-driver.hand
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: brainco-revo2-driver.hand_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: brainco-revo2-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.motion_info
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.lidar
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.lidar_rear
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.hard_estop
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.charge_status
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.gps
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.camera_front
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.camera_rear
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.native_motion_status
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.native_device_status
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.native_basic_status
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.errors
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.capabilities
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.ros_graph
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.motion_events
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.motion
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.charging
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: deep-robotics-lynx-m20-driver.device
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-m300.telemetry
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-m300.camera_stream
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-m300.perception
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-m300.hms
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-m300.flight
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-m300.aircraft_info
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.telemetry
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.camera_stream
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.perception
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.hms
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.flight
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.camera
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.gimbal
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.waypoint
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.aircraft_info
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic3e.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.telemetry
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.camera_stream
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.perception
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.hms
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.flight
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.camera
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.gimbal
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.waypoint
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.aircraft_info
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: dji-mavic4e.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motor_health
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motor_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motor_command
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.joint_command_feedback
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.gamepad
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motion_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.robot_snapshot
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.fault_summary
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.stability
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.joint_groups
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.capabilities
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.ros_graph
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.mainboard
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.driver_health
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motion_events
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.heartbeat_status
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motion_command_trace
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.native_interface_probe
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.safe_motion_mode
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.dance
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.joint_plan
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.gesture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.head
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.joint_override
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.joint_bridge
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.led
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.tts
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motor_power
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.native_node_control
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.virtual_gamepad
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.controlled_spatial
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.controlled_spatial_map
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.safety
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.native_sdk
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.speaker
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.pointcloud
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.camera
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.gait
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: engineai-t800-driver.motion_recorder
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.stand_up_lie_prone
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.semantic_action
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.action_recording
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.speaker
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.camera
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.motion_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: bumi-driver.vision_capture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.arm
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.hand
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.camera_head
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.camera_depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.camera_pointcloud
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: adam-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.base_drive
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.joints_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.hand_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.speaker
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.audio
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.camera_rgb
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.camera_depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.camera_pointcloud
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.arm_control
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.hand_control
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.hand_gesture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.arm_gesture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.head_control
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.leg_control
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.waist_control
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.odom
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.teleop_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.robot_status
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: robotera-q5-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.tts
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.speaker
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.led
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.loco_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.loco_motion_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.motion_events
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.switch_mode
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.switch_mode_expert
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.arm
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.posture
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.mainboard
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.camera_rgb
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.camera_depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.camera_distance
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.lidar_cloud
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.controlled_spatial
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.controlled_spatial_map
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.motion_switcher
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.ext_mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.ext_camera
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: g1-driver.smart_motion
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.loco_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.face_light
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.camera_rgb
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.feet
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.fall_alarm
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.odometry
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.obstacle_range
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.udp_diagnostics
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.remote_controller
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.activity_monitor
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.beep
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.speaker
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.body_pose
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.gesture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.switch_gait
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go1-driver.special_motion
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.speaker
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.vui
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.loco_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.switch_gait
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.gesture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.acrobatics
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.obstacles_avoid
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.camera_front
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.motion_switcher
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.lidar_cloud
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.pos_tag
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.slam_mapping
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.slam_cloud
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.grid_map
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.spatial
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.asr
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.ext_mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: go2-driver.ext_camera
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.tts
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.speaker
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.led
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.loco_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.loco
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.switch_mode
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.arm
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.mainboard
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.asr
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.camera_main
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.camera_left
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.camera_right
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.camera_depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.ext_mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.ext_camera
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: r1-driver.smart_motion
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.joints
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.battery
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.estop
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.force_sensor
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.model
+  category: resource
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.camera_head
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.imu
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.camera_depth
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.camera_pointcloud
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.asr
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.nav_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.power_board
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.motors
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.hand_state
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.remote_event
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.head
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.head_gesture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.arm
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.arm_gesture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.waist
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.hand
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.tts
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.voice_play
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.nav
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.home
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.chat
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.voice_chat
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.controlled_spatial
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.spatial_map
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.health_check
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.laser_scan
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.chassis_raw
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.ext_mic
+  category: sensor
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.light
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+- tool: tianyi2-driver.vision_capture
+  category: actuator
+  reason: PhanthyMotus card — embodied-robot hardware capability; 4Paradigm publishes no REST operation
+    for it in any spec in this repo
+rest_only:
+- operation: GET /account
+  path: /account
+  method: GET
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: POST /account/{userid}
+  path: /account/{userid}
+  method: POST
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: DELETE /account/{userid}
+  path: /account/{userid}
+  method: DELETE
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: PUT /account/{userid}
+  path: /account/{userid}
+  method: PUT
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /account/{userid}/balance
+  path: /account/{userid}/balance
+  method: GET
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: POST /account/{userid}/balance
+  path: /account/{userid}/balance
+  method: POST
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /computeunit/{userid}
+  path: /computeunit/{userid}
+  method: GET
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: POST /computeunit/{userid}
+  path: /computeunit/{userid}
+  method: POST
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: DELETE /computeunit/{userid}
+  path: /computeunit/{userid}
+  method: DELETE
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /computeunit/{userid}/computeunit_id/{computeunit_id}
+  path: /computeunit/{userid}/computeunit_id/{computeunit_id}
+  method: GET
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /computeunit/group/{group_name}
+  path: /computeunit/group/{group_name}
+  method: GET
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /computeunit/price
+  path: /computeunit/price
+  method: GET
+  spec: openapi/4paradigm-openaios-billing.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: deleteReleases
+  path: /releases
+  method: DELETE
+  spec: openapi/4paradigm-openaios-platform-internal.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: PineappleVersion
+  path: /version
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getUser
+  path: /user/info
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /user/tasks
+  path: /user/tasks
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: POST /user/init
+  path: /user/init
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GetComputingUnitSpecs
+  path: /computing_resource/specs
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getEnvironmentList
+  path: /environments
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getEnvironment
+  path: /environments/{name}
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: createEnvironment
+  path: /environments/{name}
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: deleteEnvironment
+  path: /environments/{name}
+  method: DELETE
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getApplicationList
+  path: /applications
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: createApplication
+  path: /applications/{name}
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: deleteApplication
+  path: /applications/{name}
+  method: DELETE
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getApplicationMetadata
+  path: /applications/{name}/metadata
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getApplicationPods
+  path: /applications/{name}/pods
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getApplicationServices
+  path: /applications/{name}/services
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getApplicationNotes
+  path: /applications/{name}/notes
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getAppstoreChartList
+  path: /appstore/charts
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: uploadChart
+  path: /appstore/charts/{category}
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getAppstoreChart
+  path: /appstore/charts/{category}/{name}/{version}
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getRelease
+  path: /releases/{name}
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: createRelease
+  path: /releases/{name}
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: deleteRelease
+  path: /releases/{name}
+  method: DELETE
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GetContainerLog
+  path: /log/pod/{pod_name}
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: ListImportingImages
+  path: /images/importing
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: POST /images/importing
+  path: /images/importing
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: DELETE /images/importing
+  path: /images/importing
+  method: DELETE
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: PUT /images/importing
+  path: /images/importing
+  method: PUT
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /images/registry
+  path: /images/registry
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /public_images/info
+  path: /public_images/info
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /public_images
+  path: /public_images
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /images/info
+  path: /images/info
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /images
+  path: /images
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: PUT /images
+  path: /images
+  method: PUT
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: DELETE /images
+  path: /images
+  method: DELETE
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /competition
+  path: /competition
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: POST /competition/{competitionID}
+  path: /competition/{competitionID}
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /competition/{competitionID}
+  path: /competition/{competitionID}
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /competition/{competitionID}/invitation
+  path: /competition/{competitionID}/invitation
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getDirectory
+  path: /storage
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: createDirectory
+  path: /storage
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: deleteDirectoryOrFile
+  path: /storage
+  method: DELETE
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: POST /storage/upload
+  path: /storage/upload
+  method: POST
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: GET /storage/download
+  path: /storage/download
+  method: GET
+  spec: openapi/4paradigm-openaios-platform.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+- operation: getTerminal
+  path: /terminal
+  method: GET
+  spec: openapi/4paradigm-openaios-webterminal.yaml
+  reason: OpenAIOS-Platform operation — no PhanthyMotus MCP card binds to it; the two are separate 4Paradigm
+    products
+coverage:
+  mcp_tools: 303
+  rest_operations: 57
+  bound: 0
+  mcp_tools_bound_pct: 0.0
+  rest_operations_bound_pct: 0.0

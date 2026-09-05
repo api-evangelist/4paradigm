@@ -1,0 +1,77 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://openmldb.ai/docs/en/main/quickstart/cli.html, https://openmldb.ai/docs/en/main/maintain/cli.html,
+  https://openmldb.ai/docs/en/main/maintain/diagnose.html, https://openmldb.ai/docs/en/main/maintain/openmldb_ops.html,
+  https://pypi.org/project/openmldb-tool/ and https://github.com/4paradigm/phanthymotus#readme
+  — fetched 2026-09-05
+name: 4Paradigm command-line tools
+note: >-
+  All first-party CLIs belong to the open-source projects. There is no CLI for any commercial Sage
+  product, and no CLI anywhere authenticates against a 4Paradigm-operated service — every one of them
+  drives software you are already running.
+clis:
+- name: openmldb (CLI)
+  binary: openmldb
+  official: true
+  install:
+  - method: docker
+    command: docker run -it 4pdosc/openmldb:0.9.2 bash
+  - method: release tarball
+    command: 'download openmldb-<version>-linux.tar.gz from https://github.com/4paradigm/OpenMLDB/releases, then bin/openmldb'
+  docs: https://openmldb.ai/docs/en/main/quickstart/cli.html
+  surface: >-
+    An interactive SQL shell rather than a verb/noun CLI — it connects to a cluster (--zk_cluster,
+    --zk_root_path, --role=sql_client, or --host/--port in standalone mode) and everything else is
+    OpenMLDB SQL: CREATE DATABASE/TABLE/INDEX/FUNCTION, INSERT, LOAD DATA INFILE, DELETE, SELECT,
+    DEPLOY, SHOW DEPLOYMENTS, SUBMIT JOB, SHOW JOBS, STOP JOB, SHOW COMPONENTS.
+  auth: >-
+    --user / --password when server-side authentication is enabled (alpha, off by default);
+    --zk_cert user:passwd for ZooKeeper credentials.
+- name: openmldb_tool
+  binary: openmldb_tool
+  official: true
+  install:
+  - method: pip
+    command: pip install openmldb-tool
+  package: https://pypi.org/project/openmldb-tool/
+  version: 0.9.2
+  published: '2024-07-27'
+  docs: https://openmldb.ai/docs/en/main/maintain/diagnose.html
+  command_groups:
+  - group: status
+    detail: cluster and component status, including --diff against the deployment configuration.
+  - group: inspect
+    detail: online/offline data inspection, job inspection.
+  - group: test
+    detail: end-to-end smoke test against a running cluster.
+  - group: static-check
+    detail: pre-deployment check of version, configuration and host connectivity.
+  - group: rpc
+    detail: direct RPC invocation against cluster components.
+  - group: 'nameserver / tablet subcommands'
+    detail: operational actions against a named component.
+- name: openmldb_ops.sh
+  binary: openmldb_ops.sh
+  official: true
+  install:
+  - method: bundled
+    command: shipped in the OpenMLDB release tarball
+  docs: https://openmldb.ai/docs/en/main/maintain/openmldb_ops.html
+  surface: cluster operations — scale-in/scale-out, recovery and node maintenance.
+- name: PhanthyMotus installer
+  binary: install.sh
+  official: true
+  install:
+  - method: shell
+    command: curl -fsSL https://motus.phanthy.com/install.sh | sudo bash
+  - method: shell (pinned)
+    command: curl -fsSL https://motus.phanthy.com/install.sh | sudo bash -s <tag>
+  docs: https://github.com/4paradigm/phanthymotus#readme
+  surface: >-
+    An installer, not a management CLI — it installs Docker if needed, pulls the Agent Core image and
+    starts the service; after that the product is driven from the web dashboard on port 15678 and by
+    the agent itself over MCP.
+  note: >-
+    Piping a remote script into sudo bash is the provider's own documented and only install path, and
+    the unpinned form floats to whatever the tag stream holds at fetch time.

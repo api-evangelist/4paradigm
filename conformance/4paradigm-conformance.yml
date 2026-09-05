@@ -1,0 +1,130 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  derived from the four OpenAPI 3.0.3 specs in openapi/ and the eight Protobuf contracts in grpc/,
+  cross-checked against 4Paradigm's own documentation — https://openmldb.ai/docs/en/main/deploy/auth.html,
+  https://openmldb.ai/docs/en/main/maintain/monitoring.html, https://openmldb.ai/docs/en/main/quickstart/sdk/,
+  and the PhanthyMotus README at https://github.com/4paradigm/phanthymotus
+name: 4Paradigm standards conformance
+note: >-
+  Every entry below is read off a contract or a provider doc, never off a marketing claim. 4Paradigm's
+  commercial Sage products publish no conformance statement at all; everything here belongs to the
+  open-source projects.
+conformance:
+- id: openid-connect
+  conforms: true
+  evidence: >-
+    openapi/4paradigm-openaios-platform.yaml components.securitySchemes.OpenID declares
+    type: openIdConnect with openIdConnectUrl /.well-known/openid-configuration, and the platform
+    ships with an OIDC provider in-cluster. The discovery document is served by the operator's own
+    deployment, not by 4Paradigm — no public one exists to probe.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme is declared in any published spec; the OpenID scheme is openIdConnect,
+    and no authorization/token endpoint, scope list or grant type is published by 4Paradigm.
+- id: api-key-auth
+  conforms: true
+  evidence: >-
+    components.securitySchemes.ApiKeyAuth — type apiKey, in header, name Authorization — in both
+    openapi/4paradigm-openaios-platform.yaml and openapi/4paradigm-openaios-billing.yaml.
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere. OpenAIOS-Platform returns a bespoke {type, message, content}
+    JSON object on 400 and text/plain on 401 and 500; the OpenMLDB APIServer returns a fixed
+    {"code": 0, "msg": "ok", "data": {...}} envelope with an integer code, documented at
+    https://openmldb.ai/docs/en/main/reference/error_code.html.
+- id: pagination
+  conforms: true
+  evidence: >-
+    openapi/4paradigm-openaios-platform.yaml declares pagination on list operations — but in TWO
+    incompatible styles within one contract: offset/limit on /appstore/charts and /images/importing,
+    page/page_size on /public_images and /images. Neither style is described in any prose doc, and no
+    total-count or next-link field is returned.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header, no request-id echo, and no replay-protection language in any spec or
+    doc across OpenMLDB, OpenAIOS-Platform or PhanthyMotus.
+- id: json-api
+  conforms: false
+  evidence: no application/vnd.api+json media type in any spec.
+- id: odata
+  conforms: false
+  evidence: no $metadata surface, no OData query options.
+- id: scim
+  conforms: false
+  evidence: >-
+    OpenAIOS-Platform manages users at /user/info and /user/init with a bespoke schema; no
+    urn:ietf:params:scim:schemas URN appears anywhere.
+- id: fhir
+  conforms: false
+  evidence: >-
+    4Paradigm markets a healthcare vertical (Sage SHIFT Healthcare) but publishes no contract for it,
+    so no FHIR conformance can be asserted either way.
+- id: grpc
+  conforms: true
+  evidence: >-
+    grpc/4paradigm-openmldb-*.proto — proto2 service definitions with cc_generic_services, carrying 140
+    RPCs across TabletServer, NameServer, TaskManager, DataSync and the APIServer bridge. Transport is
+    brpc (github.com/4paradigm/incubator-brpc), the Baidu RPC framework, rather than grpc-go/grpc-java.
+domain_standards:
+- id: model-context-protocol
+  standard: Model Context Protocol
+  conforms: true
+  evidence: >-
+    Every PhanthyMotus hardware driver bundle declares mcp_url: http://localhost:<port>/mcp in its own
+    driver.yaml (16 bundles, 303 declared cards) and the README states "MCP Data Bus — Unified Model
+    Context Protocol interface for all hardware devices" and "One MCP server per device". The contract
+    declares the standard, not a marketing page.
+    https://github.com/4paradigm/phanthymotus-driver/blob/main/booster/k1/driver.yaml
+- id: ros2-dds
+  standard: ROS 2 / DDS
+  conforms: true
+  evidence: >-
+    PhanthyMotus is built on ROS 2 and ships a native DDS bridge (agent-core/src/ros2_bridge.py,
+    agent-core/deploy/dds-local.xml); driver cards declare the ROS 2 topics they publish, and the
+    Agent Core calls each driver's info action to resolve the exact topic path before start-up.
+- id: urdf
+  standard: URDF (Unified Robot Description Format)
+  conforms: true
+  evidence: >-
+    Thirteen of the sixteen driver bundles expose a card of type `resource` named `model`, backed by a
+    .urdf file committed in the driver repository (for example booster/k1/resource/k1_model.urdf,
+    agibot/AimDK_X2/resource/x2_ultra.urdf).
+- id: sql
+  standard: SQL (MySQL-compatible dialect)
+  conforms: true
+  evidence: >-
+    OpenMLDB's contract IS a SQL dialect — DDL, DML, DQL, DEPLOYMENT and task-management statements are
+    the API, documented at https://openmldb.ai/docs/en/main/openmldb_sql/index.html, with the
+    differences from standard SQL enumerated at .../openmldb_sql/sql_difference.html. The companion
+    OpenMySQLDB project speaks the MySQL wire protocol so any MySQL client can connect.
+- id: jdbc
+  standard: JDBC
+  conforms: true
+  evidence: >-
+    com.4paradigm.openmldb:openmldb-jdbc on Maven Central is a java.sql driver; connection strings take
+    the form jdbc:openmldb:///?zk=...&zkPath=..., documented at
+    https://openmldb.ai/docs/en/main/quickstart/sdk/java_sdk.html.
+- id: python-db-api
+  standard: PEP 249 DB-API 2.0 / SQLAlchemy
+  conforms: true
+  evidence: >-
+    The openmldb PyPI package implements openmldb.dbapi.connect() and registers a SQLAlchemy dialect,
+    documented at https://openmldb.ai/docs/en/main/quickstart/sdk/python_sdk.html.
+- id: prometheus-exposition
+  standard: Prometheus exposition format
+  conforms: true
+  evidence: >-
+    OpenMLDB ships a first-party exporter (github.com/4paradigm/openmldb-exporter, also on PyPI) and the
+    monitoring guide at https://openmldb.ai/docs/en/main/maintain/monitoring.html configures Prometheus
+    scraping plus Grafana dashboards.
+- id: helm-oci
+  standard: Helm charts / OCI images
+  conforms: true
+  evidence: >-
+    OpenAIOS-Platform's app store operates on Helm charts by category/name/version
+    (/appstore/charts/{category}/{name}/{version}) and its release lifecycle is Helm releases;
+    PhanthyMotus distributes every component as an OCI image on a container registry.

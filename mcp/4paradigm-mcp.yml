@@ -1,0 +1,866 @@
+generated: '2026-09-05'
+method: searched
+source: https://github.com/4paradigm/phanthymotus-driver — the driver.yaml manifest of each of the 16
+  published bundles, fetched verbatim 2026-09-05; framework description from https://github.com/4paradigm/phanthymotus#readme
+  and the resource centre at https://motus.phanthy.com/en/drivers
+name: PhanthyMotus driver MCP bus
+status: published
+summary: 'PhanthyMotus is 4Paradigm''s open-source embodied-AI agent framework, and it is MCP-native by
+  design: ''one MCP server per device''. Each hardware driver bundle runs as its own MCP server on a fixed
+  localhost port and declares typed cards — sensor (data streams), actuator (executable actions), processor
+  (data transforms) and resource (static assets such as URDF) — which the Agent Core discovers over a
+  unified MCP data bus. 16 bundles are published with machine-readable driver.yaml manifests declaring
+  303 cards in total.'
+deployment:
+  mode: local-stdio
+  endpoint: null
+  install: curl -fsSL https://motus.phanthy.com/install.sh | sudo bash
+  package: https://github.com/4paradigm/phanthymotus-driver
+  auth: none
+  verified: searched
+  note: 'mode is local-stdio in the sense the field draws — nothing here is reachable by an agent until
+    a human installs and runs it on a machine attached to the robot. The transport is NOT stdio: each
+    driver serves streamable-HTTP MCP at http://localhost:<port>/mcp once its container is running, as
+    its own driver.yaml states. 4Paradigm operates no hosted/remote MCP endpoint, so no endpoint URL is
+    recorded — the localhost URLs below are the provider''s declared local bind addresses, not an agent-callable
+    service. Images are pulled from bj-warehouse.tencentcloudcr.com/phanthy-motus/.'
+agent_core:
+  port: 15678
+  role: MCP client and agent loop (FastAPI + ros2_bridge), also the web dashboard
+  perception_ports:
+  - 15720
+  - 15721
+  actucore_port: 15730
+  source: https://github.com/4paradigm/phanthymotus#readme
+card_types:
+  sensor: data streams the agent can read
+  actuator: executable actions the agent can invoke
+  processor: data transforms
+  resource: static assets such as URDF models
+servers:
+- id: agibot-x2-driver
+  name: AgiBot X2 (AimDK) Driver
+  hardware_provider: agibot
+  hardware_model: x2
+  mcp_url: http://localhost:15717/mcp
+  port: 15717
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/agibot/AimDK_X2/driver.yaml
+  card_count: 23
+  cards_by_type:
+    sensor: 10
+    resource: 1
+    actuator: 11
+    processor: 1
+  cards:
+  - name: mc_state
+    type: sensor
+  - name: joint_state
+    type: sensor
+  - name: hand_state
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: camera_rgb
+    type: sensor
+  - name: camera_depth
+    type: sensor
+  - name: lidar
+    type: sensor
+  - name: slam_pose
+    type: sensor
+  - name: system_state
+    type: sensor
+  - name: linkcraft_catalog
+    type: sensor
+  - name: model
+    type: resource
+  - name: mc_mode
+    type: actuator
+  - name: locomotion
+    type: actuator
+  - name: preset_motion
+    type: actuator
+  - name: joint_command
+    type: actuator
+  - name: hand_command
+    type: actuator
+  - name: linkcraft
+    type: actuator
+  - name: pmu_led
+    type: actuator
+  - name: tts
+    type: actuator
+  - name: emoji
+    type: actuator
+  - name: mic_source
+    type: actuator
+  - name: slam_control
+    type: actuator
+  - name: map_get
+    type: processor
+- id: booster-k1-driver
+  name: Booster K1 Bundle
+  hardware_provider: booster
+  hardware_model: k1
+  mcp_url: http://localhost:15705/mcp
+  port: 15705
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/booster/k1/driver.yaml
+  card_count: 11
+  cards_by_type:
+    sensor: 6
+    resource: 1
+    actuator: 4
+  cards:
+  - name: imu
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: joints
+    type: sensor
+  - name: odom
+    type: sensor
+  - name: fall_down_state
+    type: sensor
+  - name: model
+    type: resource
+  - name: camera
+    type: sensor
+  - name: loco
+    type: actuator
+  - name: upper_body
+    type: actuator
+  - name: action
+    type: actuator
+  - name: audio
+    type: actuator
+- id: brainco-revo2-driver
+  name: BrainCo Revo 2 Dexterous Hand
+  hardware_provider: brainco
+  hardware_model: revo2
+  mcp_url: http://localhost:15706/mcp
+  port: 15706
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/brainco/revo2/driver.yaml
+  card_count: 3
+  cards_by_type:
+    actuator: 1
+    sensor: 1
+    resource: 1
+  cards:
+  - name: hand
+    type: actuator
+  - name: hand_state
+    type: sensor
+  - name: model
+    type: resource
+- id: deep-robotics-lynx-m20-driver
+  name: DEEP Robotics Lynx M20 Driver
+  hardware_provider: deep-robotics
+  hardware_model: lynx-m20
+  mcp_url: http://localhost:15716/mcp
+  port: 15716
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/deep_robotics/lynx_m20/driver.yaml
+  card_count: 21
+  cards_by_type:
+    sensor: 18
+    actuator: 3
+  cards:
+  - name: state
+    type: sensor
+  - name: motion_info
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: lidar
+    type: sensor
+  - name: lidar_rear
+    type: sensor
+  - name: hard_estop
+    type: sensor
+  - name: charge_status
+    type: sensor
+  - name: gps
+    type: sensor
+  - name: joints
+    type: sensor
+  - name: camera_front
+    type: sensor
+  - name: camera_rear
+    type: sensor
+  - name: native_motion_status
+    type: sensor
+  - name: native_device_status
+    type: sensor
+  - name: native_basic_status
+    type: sensor
+  - name: errors
+    type: sensor
+  - name: capabilities
+    type: sensor
+  - name: ros_graph
+    type: sensor
+  - name: motion_events
+    type: sensor
+  - name: motion
+    type: actuator
+  - name: charging
+    type: actuator
+  - name: device
+    type: actuator
+- id: dji-m300
+  name: DJI Matrice 300 RTK Bundle
+  hardware_provider: dji
+  hardware_model: matrice300
+  mcp_url: http://localhost:15702/mcp
+  port: 15702
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/dji/M300/driver.yaml
+  card_count: 6
+  cards_by_type:
+    sensor: 4
+    actuator: 2
+  cards:
+  - name: telemetry
+    type: sensor
+  - name: camera_stream
+    type: sensor
+  - name: perception
+    type: sensor
+  - name: hms
+    type: sensor
+  - name: flight
+    type: actuator
+  - name: aircraft_info
+    type: actuator
+- id: dji-mavic3e
+  name: DJI Mavic 3E/3T Bundle
+  hardware_provider: dji
+  hardware_model: mavic3e
+  mcp_url: http://localhost:15702/mcp
+  port: 15702
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/dji/mavic3e/driver.yaml
+  card_count: 10
+  cards_by_type:
+    sensor: 4
+    actuator: 5
+    resource: 1
+  cards:
+  - name: telemetry
+    type: sensor
+  - name: camera_stream
+    type: sensor
+  - name: perception
+    type: sensor
+  - name: hms
+    type: sensor
+  - name: flight
+    type: actuator
+  - name: camera
+    type: actuator
+  - name: gimbal
+    type: actuator
+  - name: waypoint
+    type: actuator
+  - name: aircraft_info
+    type: actuator
+  - name: model
+    type: resource
+- id: dji-mavic4e
+  name: DJI Mavic 4E/4T Bundle
+  hardware_provider: dji
+  hardware_model: mavic4e
+  mcp_url: http://localhost:15703/mcp
+  port: 15703
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/dji/mavic4e/driver.yaml
+  card_count: 10
+  cards_by_type:
+    sensor: 4
+    actuator: 5
+    resource: 1
+  cards:
+  - name: telemetry
+    type: sensor
+  - name: camera_stream
+    type: sensor
+  - name: perception
+    type: sensor
+  - name: hms
+    type: sensor
+  - name: flight
+    type: actuator
+  - name: camera
+    type: actuator
+  - name: gimbal
+    type: actuator
+  - name: waypoint
+    type: actuator
+  - name: aircraft_info
+    type: actuator
+  - name: model
+    type: resource
+- id: engineai-t800-driver
+  name: EngineAI T800 Development Edition Bundle
+  hardware_provider: engineai
+  hardware_model: t800
+  mcp_url: http://localhost:15708/mcp
+  port: 15708
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/engineai/t800/driver.yaml
+  card_count: 46
+  cards_by_type:
+    sensor: 24
+    actuator: 21
+    resource: 1
+  cards:
+  - name: joints
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: motor_health
+    type: sensor
+  - name: motor_state
+    type: sensor
+  - name: motor_command
+    type: sensor
+  - name: joint_command_feedback
+    type: sensor
+  - name: gamepad
+    type: sensor
+  - name: motion_state
+    type: sensor
+  - name: robot_snapshot
+    type: sensor
+  - name: fault_summary
+    type: sensor
+  - name: stability
+    type: sensor
+  - name: joint_groups
+    type: sensor
+  - name: capabilities
+    type: sensor
+  - name: ros_graph
+    type: sensor
+  - name: mainboard
+    type: sensor
+  - name: driver_health
+    type: actuator
+  - name: model
+    type: resource
+  - name: motion_events
+    type: actuator
+  - name: heartbeat_status
+    type: sensor
+  - name: motion_command_trace
+    type: sensor
+  - name: native_interface_probe
+    type: sensor
+  - name: loco
+    type: actuator
+  - name: safe_motion_mode
+    type: actuator
+  - name: dance
+    type: actuator
+  - name: joint_plan
+    type: actuator
+  - name: gesture
+    type: actuator
+  - name: head
+    type: actuator
+  - name: joint_override
+    type: actuator
+  - name: joint_bridge
+    type: actuator
+  - name: led
+    type: actuator
+  - name: tts
+    type: actuator
+  - name: motor_power
+    type: actuator
+  - name: native_node_control
+    type: actuator
+  - name: virtual_gamepad
+    type: actuator
+  - name: controlled_spatial
+    type: actuator
+  - name: controlled_spatial_map
+    type: sensor
+  - name: safety
+    type: actuator
+  - name: native_sdk
+    type: actuator
+  - name: mic
+    type: sensor
+  - name: speaker
+    type: actuator
+  - name: pointcloud
+    type: sensor
+  - name: camera
+    type: sensor
+  - name: depth
+    type: sensor
+  - name: gait
+    type: actuator
+  - name: motion_recorder
+    type: actuator
+- id: bumi-driver
+  name: Noetix Bumi Bundle
+  hardware_provider: noetix
+  hardware_model: bumi
+  mcp_url: http://localhost:15704/mcp
+  port: 15704
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/noetix/bumi/driver.yaml
+  card_count: 14
+  cards_by_type:
+    sensor: 7
+    resource: 1
+    actuator: 6
+  cards:
+  - name: imu
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: joints
+    type: sensor
+  - name: model
+    type: resource
+  - name: loco
+    type: actuator
+  - name: stand_up_lie_prone
+    type: actuator
+  - name: semantic_action
+    type: actuator
+  - name: action_recording
+    type: actuator
+  - name: mic
+    type: sensor
+  - name: speaker
+    type: actuator
+  - name: camera
+    type: sensor
+  - name: depth
+    type: sensor
+  - name: motion_state
+    type: sensor
+  - name: vision_capture
+    type: actuator
+- id: adam-driver
+  name: PNDbotics Adam Bundle
+  hardware_provider: pndbotics
+  hardware_model: adam
+  mcp_url: http://localhost:15702/mcp
+  port: 15702
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/pndbotics/adam/driver.yaml
+  card_count: 10
+  cards_by_type:
+    sensor: 6
+    actuator: 3
+    resource: 1
+  cards:
+  - name: joints
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: loco
+    type: actuator
+  - name: arm
+    type: actuator
+  - name: hand
+    type: actuator
+  - name: camera_head
+    type: sensor
+  - name: camera_depth
+    type: sensor
+  - name: camera_pointcloud
+    type: sensor
+  - name: model
+    type: resource
+- id: robotera-q5-driver
+  name: RobotEra Q5 Bundle
+  hardware_provider: robotera
+  hardware_model: q5
+  mcp_url: http://localhost:15793/mcp
+  port: 15793
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/robotera/q5_bundle/driver.yaml
+  card_count: 22
+  cards_by_type:
+    actuator: 10
+    sensor: 11
+    resource: 1
+  cards:
+  - name: base_drive
+    type: actuator
+  - name: joints
+    type: sensor
+  - name: joints_state
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: hand_state
+    type: sensor
+  - name: mic
+    type: sensor
+  - name: speaker
+    type: actuator
+  - name: audio
+    type: actuator
+  - name: camera_rgb
+    type: sensor
+  - name: camera_depth
+    type: sensor
+  - name: camera_pointcloud
+    type: sensor
+  - name: arm_control
+    type: actuator
+  - name: hand_control
+    type: actuator
+  - name: hand_gesture
+    type: actuator
+  - name: arm_gesture
+    type: actuator
+  - name: head_control
+    type: actuator
+  - name: leg_control
+    type: actuator
+  - name: waist_control
+    type: actuator
+  - name: odom
+    type: sensor
+  - name: teleop_state
+    type: sensor
+  - name: robot_status
+    type: sensor
+  - name: model
+    type: resource
+- id: g1-driver
+  name: Unitree G1 Bundle
+  hardware_provider: unitree
+  hardware_model: g1
+  mcp_url: http://localhost:15701/mcp
+  port: 15701
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/unitree/g1/driver.yaml
+  card_count: 27
+  cards_by_type:
+    sensor: 16
+    actuator: 10
+    resource: 1
+  cards:
+  - name: mic
+    type: sensor
+  - name: tts
+    type: actuator
+  - name: speaker
+    type: actuator
+  - name: led
+    type: actuator
+  - name: loco_state
+    type: sensor
+  - name: loco_motion_state
+    type: sensor
+  - name: motion_events
+    type: sensor
+  - name: loco
+    type: actuator
+  - name: switch_mode
+    type: actuator
+  - name: switch_mode_expert
+    type: actuator
+  - name: arm
+    type: actuator
+  - name: posture
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: joints
+    type: sensor
+  - name: mainboard
+    type: sensor
+  - name: model
+    type: resource
+  - name: camera_rgb
+    type: sensor
+  - name: camera_depth
+    type: sensor
+  - name: camera_distance
+    type: sensor
+  - name: lidar_cloud
+    type: sensor
+  - name: controlled_spatial
+    type: actuator
+  - name: controlled_spatial_map
+    type: sensor
+  - name: motion_switcher
+    type: actuator
+  - name: ext_mic
+    type: sensor
+  - name: ext_camera
+    type: sensor
+  - name: smart_motion
+    type: actuator
+- id: go1-driver
+  name: Unitree Go1 Bundle
+  hardware_provider: unitree
+  hardware_model: go1
+  mcp_url: http://localhost:15715/mcp
+  port: 15715
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/unitree/go1/driver.yaml
+  card_count: 21
+  cards_by_type:
+    sensor: 11
+    actuator: 9
+    resource: 1
+  cards:
+  - name: loco_state
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: face_light
+    type: actuator
+  - name: camera_rgb
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: feet
+    type: sensor
+  - name: fall_alarm
+    type: sensor
+  - name: odometry
+    type: sensor
+  - name: obstacle_range
+    type: sensor
+  - name: udp_diagnostics
+    type: sensor
+  - name: joints
+    type: sensor
+  - name: remote_controller
+    type: sensor
+  - name: model
+    type: resource
+  - name: activity_monitor
+    type: actuator
+  - name: beep
+    type: actuator
+  - name: speaker
+    type: actuator
+  - name: loco
+    type: actuator
+  - name: body_pose
+    type: actuator
+  - name: gesture
+    type: actuator
+  - name: switch_gait
+    type: actuator
+  - name: special_motion
+    type: actuator
+- id: go2-driver
+  name: Unitree Go2 Bundle
+  hardware_provider: unitree
+  hardware_model: go2
+  mcp_url: http://localhost:15703/mcp
+  port: 15703
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/unitree/go2/driver.yaml
+  card_count: 23
+  cards_by_type:
+    sensor: 14
+    actuator: 9
+  cards:
+  - name: mic
+    type: sensor
+  - name: speaker
+    type: actuator
+  - name: vui
+    type: actuator
+  - name: loco_state
+    type: sensor
+  - name: loco
+    type: actuator
+  - name: switch_gait
+    type: actuator
+  - name: gesture
+    type: actuator
+  - name: acrobatics
+    type: actuator
+  - name: obstacles_avoid
+    type: actuator
+  - name: camera_front
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: joints
+    type: sensor
+  - name: motion_switcher
+    type: actuator
+  - name: lidar_cloud
+    type: sensor
+  - name: pos_tag
+    type: sensor
+  - name: slam_mapping
+    type: sensor
+  - name: slam_cloud
+    type: sensor
+  - name: grid_map
+    type: sensor
+  - name: spatial
+    type: actuator
+  - name: asr
+    type: sensor
+  - name: ext_mic
+    type: sensor
+  - name: ext_camera
+    type: sensor
+- id: r1-driver
+  name: Unitree R1 Bundle
+  hardware_provider: unitree
+  hardware_model: r1
+  mcp_url: http://localhost:15702/mcp
+  port: 15702
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/unitree/r1/driver.yaml
+  card_count: 21
+  cards_by_type:
+    sensor: 13
+    actuator: 7
+    resource: 1
+  cards:
+  - name: mic
+    type: sensor
+  - name: tts
+    type: actuator
+  - name: speaker
+    type: actuator
+  - name: led
+    type: actuator
+  - name: loco_state
+    type: sensor
+  - name: loco
+    type: actuator
+  - name: switch_mode
+    type: actuator
+  - name: arm
+    type: actuator
+  - name: imu
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: joints
+    type: sensor
+  - name: mainboard
+    type: sensor
+  - name: model
+    type: resource
+  - name: asr
+    type: sensor
+  - name: camera_main
+    type: sensor
+  - name: camera_left
+    type: sensor
+  - name: camera_right
+    type: sensor
+  - name: camera_depth
+    type: sensor
+  - name: ext_mic
+    type: sensor
+  - name: ext_camera
+    type: sensor
+  - name: smart_motion
+    type: actuator
+- id: tianyi2-driver
+  name: Tianyi 2.0 Pro Bundle
+  hardware_provider: x-humanoid
+  hardware_model: tianyi2.0
+  mcp_url: http://localhost:15707/mcp
+  port: 15707
+  manifest: https://github.com/4paradigm/phanthymotus-driver/blob/main/x-humanoid/tianyi2.0/driver.yaml
+  card_count: 35
+  cards_by_type:
+    sensor: 16
+    resource: 1
+    actuator: 18
+  cards:
+  - name: joints
+    type: sensor
+  - name: battery
+    type: sensor
+  - name: estop
+    type: sensor
+  - name: force_sensor
+    type: sensor
+  - name: model
+    type: resource
+  - name: camera_head
+    type: sensor
+  - name: imu
+    type: sensor
+  - name: camera_depth
+    type: sensor
+  - name: camera_pointcloud
+    type: sensor
+  - name: asr
+    type: sensor
+  - name: nav_state
+    type: sensor
+  - name: power_board
+    type: sensor
+  - name: motors
+    type: sensor
+  - name: hand_state
+    type: sensor
+  - name: remote_event
+    type: sensor
+  - name: head
+    type: actuator
+  - name: head_gesture
+    type: actuator
+  - name: arm
+    type: actuator
+  - name: arm_gesture
+    type: actuator
+  - name: waist
+    type: actuator
+  - name: hand
+    type: actuator
+  - name: tts
+    type: actuator
+  - name: voice_play
+    type: actuator
+  - name: nav
+    type: actuator
+  - name: home
+    type: actuator
+  - name: chat
+    type: actuator
+  - name: voice_chat
+    type: actuator
+  - name: controlled_spatial
+    type: actuator
+  - name: spatial_map
+    type: actuator
+  - name: health_check
+    type: actuator
+  - name: laser_scan
+    type: sensor
+  - name: chassis_raw
+    type: actuator
+  - name: ext_mic
+    type: sensor
+  - name: light
+    type: actuator
+  - name: vision_capture
+    type: actuator
+totals:
+  bundles: 16
+  cards: 303
+  by_type:
+    sensor: 165
+    resource: 13
+    actuator: 124
+    processor: 1
+schemas:
+  available: false
+  note: Card names and types are published; the per-tool JSON inputSchema is not. It is served by each
+    driver's own MCP server at runtime (tools/list against http://localhost:<port>/mcp), which requires
+    the hardware and the container to be running. No live introspection was possible from outside, and
+    none was fabricated.

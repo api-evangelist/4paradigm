@@ -64,5 +64,32 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-4Paradigm is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+4Paradigm (Beijing Fourth Paradigm Intelligent Technology, HKEX 6682) is a Chinese enterprise AI
+company building decision-making and generative AI platforms — Sage AIOS, Sage HyperCycle ML/CV/OCR,
+SageGPT and the SageOne appliances — for banking, insurance, securities, retail, energy, healthcare
+and manufacturing.
+
+- Company site: https://www.4paradigm.com/
+- Open-source community: https://github.com/4paradigm
+- Investor relations: http://ir.4paradigm.com/en/index.html
+
+## What this profile covers
+
+4Paradigm's commercial Sage products are sold through a sales motion and publish no API. Everything
+machine-readable in this profile comes from its open-source projects, all of which are self-hosted:
+
+| Surface | Contract | State |
+| --- | --- | --- |
+| **OpenMLDB** — ML feature database | 8 Protobuf services (140 RPCs) in `grpc/`; a documented REST APIServer with no OpenAPI | Apache-2.0; last release v0.9.3, 2025-02-21 |
+| **OpenAIOS-Platform (Pineapple)** — Kubernetes AI development platform | 4 first-party OpenAPI 3.0.3 documents (57 operations) in `openapi/` | Apache-2.0; repository dormant since 2021-08-20 |
+| **PhanthyMotus** — embodied-AI agent framework | 16 driver bundles, each an MCP server, declaring 303 typed cards (`mcp/`) | Apache-2.0; shipping daily |
+| **Sage App Store catalogue** | none published; five endpoints probed live and unauthenticated | live at https://apps.4paradigm.com/api |
+
+Notable findings from the 2026-09-05 enrichment pass:
+
+- The OpenMLDB REST APIServer is deprecated for production **by 4Paradigm's own documentation**.
+- No `/.well-known/` document is served on any host; `www.4paradigm.com` answers 200 with an HTML
+  catch-all for every path, which is a soft-404 rather than a document.
+- No idempotency, no rate-limit signalling, no status page, no deprecation policy and no published
+  pricing anywhere in the estate.
+- 4Paradigm publishes no A2A agent card; none was authored on its behalf.

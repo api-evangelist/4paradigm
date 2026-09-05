@@ -1,0 +1,84 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  derived from openapi/4paradigm-openaios-billing.yaml and openapi/4paradigm-openaios-platform.yaml,
+  then upgraded from 4Paradigm's own documentation at https://openmldb.ai/docs/en/main/deploy/auth.html
+  and https://github.com/4paradigm/phanthymotus#readme (fetched 2026-09-05), plus a live unauthenticated
+  probe of https://apps.4paradigm.com/api/ on 2026-09-05
+docs: https://openmldb.ai/docs/en/main/deploy/auth.html
+summary:
+  types:
+  - apiKey
+  - openIdConnect
+  - none
+  api_key_in:
+  - header
+  note: >-
+    4Paradigm issues no credentials for anything. Every scheme below is enforced by software you run
+    yourself, so "authentication" here means what the shipped default is — and the shipped defaults are
+    weak: OpenMLDB runs as root with an empty password unless you turn authentication on, PhanthyMotus
+    driver MCP endpoints declare no auth at all, and the one publicly reachable surface is open.
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  surface: OpenAIOS-Platform, OpenAIOS Billing
+  sources:
+  - openapi/4paradigm-openaios-billing.yaml
+  - openapi/4paradigm-openaios-platform.yaml
+  note: >-
+    Declared as a raw apiKey in the Authorization header — no scheme prefix (no `Bearer`, no `ApiKey`)
+    is specified by the contract, and no key format, rotation or issuance is documented.
+- name: OpenID
+  type: openIdConnect
+  openIdConnectUrl: /.well-known/openid-configuration
+  scopes_requested: [openid, email, profile]
+  surface: OpenAIOS-Platform
+  sources:
+  - openapi/4paradigm-openaios-platform.yaml
+  note: >-
+    The discovery document is relative, so it resolves against the operator's own deployment. No
+    4Paradigm-hosted OIDC issuer exists; probed 2026-09-05, every 4paradigm.com host returns a 404 or
+    an HTML catch-all for /.well-known/openid-configuration.
+- name: OpenMLDB cluster authentication
+  type: username-password
+  surface: OpenMLDB (SDKs, CLI, APIServer, TaskManager)
+  status: alpha, disabled by default
+  docs: https://openmldb.ai/docs/en/main/deploy/auth.html
+  detail: >-
+    Introduced in 0.8.5 and made an explicit alpha in 0.9.0. Off unless every client and server is
+    started with --skip_grant_tables=false. Until then the cluster accepts the root user with an EMPTY
+    password, and CREATE USER / ALTER USER / DELETE USER are rejected. Credentials are set with SQL
+    (`alter user root set options (password='...')`), and the APIServer and TaskManager must
+    themselves be reconfigured with --user/--password because they connect as clients.
+- name: ZooKeeper credentials
+  type: username-password
+  surface: OpenMLDB cluster coordination
+  status: available since 0.8.4
+  docs: https://openmldb.ai/docs/en/main/deploy/auth.html
+  detail: >-
+    Separate from cluster authentication. Configured as zookeeper.cert=user:passwd (TaskManager),
+    --zk_cert=user:passwd (servers and CLI), SdkOption.setZkCert(...) (Java) or zkCert= (Python), and
+    it may be passed inside a JDBC URL — which puts a credential in a connection string.
+- name: PhanthyMotus driver MCP endpoints
+  type: none
+  surface: 'http://localhost:<port>/mcp, 16 driver bundles'
+  sources:
+  - mcp/4paradigm-mcp.yml
+  detail: >-
+    No auth is declared in any driver.yaml. The security model is the loopback bind plus the private
+    network the robot sits on. Identity, pairing and signed requests exist only for robot-to-robot peer
+    delegation, not for the tool surface an agent calls.
+- name: Sage App Store catalogue API
+  type: none
+  surface: https://apps.4paradigm.com/api
+  method: probed
+  detail: >-
+    Live, public and unauthenticated — /api/model, /api/model-category, /api/solutions,
+    /api/highlights/latest and /api/top-banners all returned 200 application/json to an anonymous
+    request on 2026-09-05. Read-only catalogue content; no credential is offered or required.
+mtls:
+  supported: false
+token_endpoints:
+  published: false

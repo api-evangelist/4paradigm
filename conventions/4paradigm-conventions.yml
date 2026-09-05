@@ -1,0 +1,175 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  derived from openapi/ and grpc/ in this repository and from 4Paradigm's own documentation —
+  https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html,
+  https://openmldb.ai/docs/en/main/deploy/auth.html,
+  https://openmldb.ai/docs/en/main/reference/error_code.html,
+  https://openmldb.ai/docs/en/main/openmldb_sql/ and https://github.com/4paradigm/phanthymotus
+  (all fetched 2026-09-05)
+name: 4Paradigm cross-cutting API conventions
+scope: >-
+  Three separate open-source products with three separate conventions. There is no house style across
+  4Paradigm, and no cross-cutting API guideline is published anywhere.
+auth:
+  style: mixed
+  openaios_platform: >-
+    Two schemes declared side by side — openIdConnect (openIdConnectUrl /.well-known/openid-configuration,
+    scopes openid/email/profile) and apiKey in the Authorization header. Both are served by the
+    operator's own deployment; 4Paradigm issues no credentials.
+  openmldb: >-
+    Off by default. Server-side username/password authentication is an ALPHA feature introduced in 0.9.0
+    and must be switched on with --skip_grant_tables=false; until then every client connects as root with
+    an empty password. ZooKeeper credentials are separate (--zk_cert=user:passwd).
+  phanthymotus: >-
+    Driver MCP endpoints bind to localhost with no declared auth; identity and pairing exist only between
+    peer robots (key-based identity plus six-digit pairing), not on the tool surface.
+  detail: authentication/4paradigm-authentication.yml
+idempotency:
+  coverage: none
+  header: null
+  scope: []
+  retention: null
+  note: >-
+    No replay protection of any kind. No Idempotency-Key header, no client-supplied request id, and no
+    conditional-write semantics in any of the 57 published REST operations or 140 RPCs. Retrying a
+    failed POST /releases/{name}, POST /account/{userid}/balance or a PUT row insert is a decision the
+    caller has to reason about with no help from the contract.
+pagination:
+  style: mixed
+  note: >-
+    Two incompatible styles inside one contract, neither documented in prose.
+  variants:
+  - params: [offset, limit]
+    operations: [getAppstoreChartList, ListImportingImages]
+    spec: openapi/4paradigm-openaios-platform.yaml
+  - params: [page, page_size]
+    operations: ['GET /public_images', 'GET /images']
+    spec: openapi/4paradigm-openaios-platform.yaml
+  response_fields: none
+  total_count: not returned
+  cursors: none
+  link_header: none
+field_expansion:
+  supported: false
+sparse_fields:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    No free-form metadata bag on any resource. OpenAIOS-Platform exposes Kubernetes object metadata
+    read-only at /applications/{name}/metadata.
+request_tracing:
+  request_id_header: none
+  note: >-
+    No request/correlation id is accepted or returned on any surface, which is what makes the
+    text/plain 500 in the platform API unactionable — there is nothing to quote to an operator.
+versioning:
+  api_versioning: none
+  note: >-
+    No version segment, header or media-type parameter on any REST surface. Versioning is by ARTEFACT:
+    the OpenMLDB release you deploy, the OpenAPI document's info.version (0.0.1 for the platform, 0.0.2
+    for billing) and the image tag for PhanthyMotus. The documentation site is versioned per release
+    (/docs/en/main/, /docs/en/v0.9/ … back to v0.4).
+  introspection:
+  - operation: PineappleVersion
+    path: /version
+    detail: Returns the running image version of the platform.
+  - statement: SHOW COMPONENTS
+    detail: OpenMLDB SQL statement returning the version and status of every cluster component.
+error_envelope:
+  shape: bespoke, three variants
+  detail: errors/4paradigm-problem-types.yml
+rate_limit_signaling:
+  headers: none
+  status_on_exhaustion: none
+  detail: rate-limits/4paradigm-rate-limits.yml
+content_negotiation:
+  request: application/json
+  response: application/json, with text/plain on 401 and 500 in the platform API and
+    application/octet-stream on storage download
+  json_extensions: >-
+    The OpenMLDB APIServer accepts and returns non-standard JSON literals — NaN, Infinity, -Infinity and
+    the abbreviations Inf/-Inf, unquoted — and offers write_nan_and_inf_null to coerce them to null.
+    A strict JSON parser will fail on the default output; this is documented, and it is a real
+    interoperability hazard for agents.
+data_typing_hazards:
+  documented: true
+  source: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
+  notes:
+  - Timestamps must be passed as integers; year-month-day strings are rejected.
+  - Date values must be a year-month-day string with no spaces.
+  - Values above float max but below double max silently become Inf on read.
+  - Floating-point precision loss is explicitly not rejected; 0.3 reads back as 0.30000000000000004.
+  - true/false/null are lowercase-only.
+dry_run_mode:
+  supported: false
+  note: >-
+    No dry-run, preview or validate-only mode on any write. The nearest thing is the separate
+    OpenMLDBSQLEmulator project, which validates OpenMLDB SQL offline without a cluster.
+reversibility:
+  grade: documented
+  note: >-
+    Reversal paths exist and are obvious from the contract, but 4Paradigm publishes no window for any of
+    them, and several destructive operations are unqualified deletes with no soft-delete, no trash, and
+    no restore. An agent can undo a create; it cannot undo a delete.
+  write_surfaces:
+  - operation: createEnvironment
+    reversal: deleteEnvironment
+    window: null
+    evidence: openapi/4paradigm-openaios-platform.yaml
+  - operation: createApplication
+    reversal: deleteApplication
+    window: null
+    evidence: openapi/4paradigm-openaios-platform.yaml
+  - operation: createRelease
+    reversal: deleteRelease
+    window: null
+    evidence: openapi/4paradigm-openaios-platform.yaml
+    note: Helm-backed, so the underlying tool supports rollback, but no rollback operation is exposed.
+  - operation: createDirectory / Upload File
+    reversal: deleteDirectoryOrFile
+    window: null
+    evidence: openapi/4paradigm-openaios-platform.yaml
+  - operation: 'POST /images/importing (Import images)'
+    reversal: 'PUT /images/importing (Stop importing) then DELETE /images/importing'
+    window: null
+    evidence: openapi/4paradigm-openaios-platform.yaml
+    note: The only genuine in-flight cancel in the whole surface.
+  - operation: 'POST /account/{userid}/balance (modify balance)'
+    reversal: null
+    window: null
+    evidence: openapi/4paradigm-openaios-billing.yaml
+    note: >-
+      A balance mutation with no compensating operation and no ledger endpoint — the only way back is
+      another balance modification, which is not the same thing as a reversal.
+  - operation: 'PUT /dbs/{db}/tables/{table} (insert row)'
+    reversal: 'DELETE statement via SQL'
+    window: null
+    evidence: https://openmldb.ai/docs/en/main/openmldb_sql/dml/DELETE_STATEMENT.html
+    note: >-
+      Deletion is by index key, not by row id, and the docs warn that online deletes are constrained by
+      the table's indexes.
+  - operation: 'DEPLOY (create a real-time feature service)'
+    reversal: DROP DEPLOYMENT
+    window: null
+    evidence: https://openmldb.ai/docs/en/main/openmldb_sql/deployment_manage/DROP_DEPLOYMENT_STATEMENT.html
+  - operation: 'SUBMIT JOB (offline task)'
+    reversal: STOP JOB
+    window: null
+    evidence: https://openmldb.ai/docs/en/main/openmldb_sql/task_manage/STOP_JOB.html
+    note: Stops the job; does not roll back rows the job already wrote.
+  - operation: 'PhanthyMotus actuator cards (loco, arm, hand, flight, waypoint …)'
+    reversal: null
+    window: null
+    evidence: mcp/4paradigm-mcp.yml
+    note: >-
+      124 actuator cards move physical hardware. Nothing in the published manifests declares an undo, a
+      safe-stop tool or a bounded window, and physical motion is not reversible in the sense this field
+      means. Treat every actuator card as irreversible.
+cross_links:
+  errors: errors/4paradigm-problem-types.yml
+  lifecycle: lifecycle/4paradigm-lifecycle.yml
+  authentication: authentication/4paradigm-authentication.yml
+  rate_limits: rate-limits/4paradigm-rate-limits.yml
+  data_model: data-model/4paradigm-data-model.yml

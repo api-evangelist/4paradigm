@@ -1,0 +1,61 @@
+# 4Paradigm
+
+> 4Paradigm (Beijing Fourth Paradigm Intelligent Technology, HKEX 6682) is a Chinese enterprise AI
+> company. Its commercial Sage products are sold and deployed, not self-served, and publish no API.
+> Everything machine-readable that 4Paradigm publishes comes from its open-source community at
+> github.com/4paradigm: OpenMLDB (a machine-learning feature database), OpenAIOS-Platform (a
+> Kubernetes AI development platform) and PhanthyMotus (an MCP-native embodied-AI agent framework).
+> All three are self-hosted — there is no 4Paradigm-operated public API endpoint to call.
+
+Generated 2026-09-05 by the API Evangelist enrichment pipeline from this repository's artifacts and
+4Paradigm's public surface. 4Paradigm publishes no llms.txt of its own (probed 2026-09-05:
+www.4paradigm.com/llms.txt returns a 200 HTML catch-all, every other host 404s or 500s).
+
+## APIs
+
+- [OpenMLDB APIServer REST API](https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html):
+  HTTP/JSON over an OpenMLDB cluster — PUT a row into a table, POST to a deployed real-time feature
+  service, POST online/offline SQL, GET deployment and table metadata, POST /refresh to clear the
+  metadata cache. Default base in the provider's own examples: http://127.0.0.1:8080. The docs state
+  APIServer is "mainly used for functional testing, not recommended for the production environment".
+- [OpenMLDB cluster RPC services](https://github.com/4paradigm/OpenMLDB/tree/main/src/proto): 140
+  Protobuf RPCs over brpc across TabletServer (59), NameServer (58), TaskManager (17) and the
+  data-sync services (5). Saved verbatim in grpc/.
+- [OpenAIOS Platform API (Pineapple)](https://github.com/4paradigm/openaios-platform): OpenAPI 3.0.3,
+  45 operations over environments, applications, Helm releases, the app store, container images,
+  object storage, competitions, logs and web terminals.
+- [OpenAIOS Platform Billing API](https://github.com/4paradigm/openaios-platform/blob/master/doc/api/billing.yaml):
+  OpenAPI 3.0.3, 12 operations over accounts, balances, compute units and compute-unit pricing.
+- [PhanthyMotus driver MCP bus](https://motus.phanthy.com/en/drivers): 16 hardware driver bundles,
+  each an MCP server at http://localhost:<port>/mcp, declaring 303 typed cards (165 sensor,
+  124 actuator, 13 resource, 1 processor).
+
+## Documentation
+
+- [OpenMLDB documentation](https://openmldb.ai/docs/en/main/): the main reference.
+- [OpenMLDB quickstart](https://openmldb.ai/docs/en/main/quickstart/openmldb_quickstart.html)
+- [OpenMLDB SQL reference](https://openmldb.ai/docs/en/main/openmldb_sql/index.html)
+- [OpenMLDB authentication](https://openmldb.ai/docs/en/main/deploy/auth.html): ZooKeeper credentials,
+  and server-side user authentication (alpha in 0.9.0, off by default).
+- [OpenMLDB error codes](https://openmldb.ai/docs/en/main/reference/error_code.html)
+- [PhanthyMotus README](https://github.com/4paradigm/phanthymotus#readme): architecture, ports, the
+  sense-think-act loop and the MCP data bus.
+- [PhanthyMotus updates](https://motus.phanthy.com/en/updates): the dated changelog.
+
+## SDKs and packages
+
+- Python: [openmldb](https://pypi.org/project/openmldb/) 0.9.2 (2024-07-27),
+  [openmldb-tool](https://pypi.org/project/openmldb-tool/) 0.9.2 (2024-07-27)
+- Java/Scala: com.4paradigm.openmldb on Maven Central — openmldb-jdbc, openmldb-native,
+  openmldb-batch, openmldb-spark-connector, openmldb-taskmanager, openmldb-synctool
+- Go: [openmldb-go-sdk](https://pkg.go.dev/github.com/4paradigm/openmldb-go-sdk) v0.2.0 (2024-04-28), alpha
+- Docker: [4pdosc/openmldb](https://hub.docker.com/r/4pdosc/openmldb) 0.9.2 (2024-07-30)
+
+## Notes for agents
+
+- Nothing here is callable without deploying it first. There is no hosted endpoint, no API key issuance,
+  no sign-up, no pricing page and no rate limit to respect — 4Paradigm publishes none of these.
+- The commercial Sage product pages on www.4paradigm.com are mid-migration; some product URLs
+  (for example /product/aios.html) return a 200 HTML template with no content.
+- OpenMLDB's REST responses are a fixed {"code": 0, "msg": "ok", ...} envelope, not RFC 9457.
+- OpenMLDB releases stopped at v0.9.3 (2025-02-21); PhanthyMotus ships images daily.

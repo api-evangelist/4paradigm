@@ -1,0 +1,185 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  Registry metadata endpoints queried unauthenticated on 2026-09-05 — pypi.org/pypi/<pkg>/json,
+  repo1.maven.org maven-metadata.xml under com/4paradigm/, proxy.golang.org @latest,
+  hub.docker.com/v2 — plus the PhanthyMotus resource centre image list at
+  https://motus.phanthy.com/en/drivers. npm, crates.io, NuGet, RubyGems and Packagist were
+  checked and carry no 4Paradigm-published package.
+name: 4Paradigm client libraries and distributions
+note: >-
+  4Paradigm publishes no SDK for its commercial Sage products; every first-party client
+  library below belongs to its open-source projects (OpenMLDB, OpenAIOS, PhanthyMotus).
+  Currency is the headline finding: the OpenMLDB SDKs on PyPI, Docker Hub and pkg.go.dev
+  have not shipped a release since 2024, and the only 2025+ movement in the family is an
+  unreleased 1.6.0-pre build on Maven Central. PhanthyMotus, by contrast, ships images
+  daily but distributes them ONLY as OCI images on a Tencent Cloud registry — there is no
+  package-registry entry for it at all.
+packages:
+- name: openmldb
+  registry: pypi
+  url: https://pypi.org/project/openmldb/
+  language: python
+  official: true
+  version: 0.9.2
+  published: '2024-07-27'
+  description: OpenMLDB Python SDK — DB-API / SQLAlchemy driver and the online request client.
+  repository: https://github.com/4paradigm/OpenMLDB
+  docs: https://openmldb.ai/docs/en/main/quickstart/sdk/python_sdk.html
+- name: openmldb-tool
+  registry: pypi
+  url: https://pypi.org/project/openmldb-tool/
+  language: python
+  official: true
+  version: 0.9.2
+  published: '2024-07-27'
+  description: >-
+    OpenMLDB diagnostic and operations CLI (openmldb_tool) — inspect, status, test,
+    static-check and log collection against a running cluster.
+  repository: https://github.com/4paradigm/OpenMLDB
+  docs: https://openmldb.ai/docs/en/main/maintain/diagnose.html
+- name: com.4paradigm.openmldb:openmldb-jdbc
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/4paradigm/openmldb/openmldb-jdbc/
+  language: java
+  official: true
+  version: 1.6.0-pre
+  published: '2025-08-27'
+  description: OpenMLDB Java SDK — JDBC driver and the SqlClusterExecutor request client.
+  repository: https://github.com/4paradigm/OpenMLDB
+  docs: https://openmldb.ai/docs/en/main/quickstart/sdk/java_sdk.html
+  note: >-
+    version/published are the latest artifact in the registry's maven-metadata.xml, which is
+    a pre-release. The latest STABLE coordinate is 0.9.3, matching the v0.9.3 GitHub release
+    of 2025-02-21.
+- name: com.4paradigm.openmldb:openmldb-native
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/4paradigm/openmldb/openmldb-native/
+  language: java
+  official: true
+  version: 1.6.0-pre
+  published: '2025-08-27'
+  description: JNI-native companion artifact required by openmldb-jdbc.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: com.4paradigm.openmldb:openmldb-batch
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/4paradigm/openmldb/openmldb-batch/
+  language: scala
+  official: true
+  version: 1.6.0-pre
+  published: '2025-08-27'
+  description: OpenMLDB offline batch engine on the OpenMLDB Spark distribution.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: com.4paradigm.openmldb:openmldb-spark-connector
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/4paradigm/openmldb/openmldb-spark-connector/
+  language: scala
+  official: true
+  version: 1.6.0-pre
+  published: '2025-08-27'
+  description: Spark DataSource connector for reading and writing OpenMLDB tables.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: com.4paradigm.openmldb:openmldb-taskmanager
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/4paradigm/openmldb/openmldb-taskmanager/
+  language: scala
+  official: true
+  version: 1.6.0-pre
+  published: '2025-08-27'
+  description: TaskManager server component — the offline job scheduler of an OpenMLDB cluster.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: com.4paradigm.openmldb:openmldb-synctool
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/4paradigm/openmldb/openmldb-synctool/
+  language: java
+  official: true
+  version: 1.6.0-pre
+  published: '2025-08-27'
+  description: Online-to-offline data synchronisation tool.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: com.4paradigm.hybridse:hybridse-sdk
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/4paradigm/hybridse/hybridse-sdk/
+  language: java
+  official: true
+  version: 1.6.0-pre
+  published: '2025-08-27'
+  description: HybridSE — the SQL engine SDK OpenMLDB's Java clients compile against.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: github.com/4paradigm/openmldb-go-sdk
+  registry: gomod
+  url: https://pkg.go.dev/github.com/4paradigm/openmldb-go-sdk
+  language: go
+  official: true
+  version: v0.2.0
+  published: '2024-04-28'
+  description: >-
+    Official OpenMLDB Go SDK — a database/sql driver that talks to the APIServer HTTP
+    surface. Marked [Alpha] in the provider's own documentation.
+  repository: https://github.com/4paradigm/openmldb-go-sdk
+  docs: https://openmldb.ai/docs/en/main/quickstart/sdk/go_sdk.html
+- name: 4pdosc/openmldb
+  registry: dockerhub
+  url: https://hub.docker.com/r/4pdosc/openmldb
+  language: n/a
+  official: true
+  version: 0.9.2
+  published: '2024-07-30'
+  description: All-in-one OpenMLDB server image used by every quickstart in the docs.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: 4pdosc/hybridsql
+  registry: dockerhub
+  url: https://hub.docker.com/r/4pdosc/hybridsql
+  language: n/a
+  official: true
+  version: null
+  published: '2025-02-21'
+  description: >-
+    OpenMLDB compile/development image. Tagged by toolchain generation rather than by
+    product version, so no single "latest version" is meaningful; published is the
+    registry's last_updated.
+  repository: https://github.com/4paradigm/OpenMLDB
+- name: phanthy-motus/core
+  registry: cdn
+  url: https://motus.phanthy.com/en/drivers
+  language: n/a
+  official: true
+  version: release.260906.b1a4b8a
+  published: '2026-09-05'
+  description: >-
+    PhanthyMotus Agent Core OCI image, pulled as
+    bj-warehouse.tencentcloudcr.com/phanthy-motus/core:release.260906.b1a4b8a. Not in any
+    public package registry — the resource centre is the only index, and it lists 20
+    bundles carrying 313 cards in total.
+  repository: https://github.com/4paradigm/phanthymotus
+  note: >-
+    registry: cdn because a private Tencent Cloud container registry exposes no public
+    metadata endpoint; version and published were read from the provider's own resource
+    centre listing, which pins an exact tag per image.
+- name: phanthy-motus/drivers/x-humanoid/tianyi2.0
+  registry: cdn
+  url: https://motus.phanthy.com/en/drivers
+  language: n/a
+  official: true
+  version: release.260906.562f89f
+  published: '2026-09-05'
+  description: >-
+    Representative PhanthyMotus hardware driver image (35 cards). Fifteen further vendor
+    bundles are published the same way; see mcp/4paradigm-mcp.yml for the full list.
+  repository: https://github.com/4paradigm/phanthymotus-driver
+absent_registries:
+- registry: npm
+  checked: '2026-09-05'
+  result: no first-party package (@4paradigm scope and bare names 404)
+- registry: crates.io
+  checked: '2026-09-05'
+  result: none
+- registry: nuget
+  checked: '2026-09-05'
+  result: none
+- registry: rubygems
+  checked: '2026-09-05'
+  result: none
+- registry: packagist
+  checked: '2026-09-05'
+  result: none

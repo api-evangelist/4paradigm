@@ -1,0 +1,138 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://motus.phanthy.com/en/updates (fetched 2026-09-05) and
+  https://github.com/4paradigm/OpenMLDB/releases (GitHub Releases API, fetched 2026-09-05)
+name: 4Paradigm change logs
+note: >-
+  4Paradigm keeps no company-wide changelog. Two of its three open-source products publish one, and
+  they are moving at completely different speeds: PhanthyMotus ships dated, categorised entries several
+  times a week, while OpenMLDB has published nothing since February 2025.
+changelogs:
+- surface: PhanthyMotus
+  url: https://motus.phanthy.com/en/updates
+  scheme: dated entries typed Release / Article / Event / Announcement and tagged by component
+    (core, driver, perception)
+  current_version: release.260906.b1a4b8a
+  version_scheme: 'release.<YYMMDD>.<git sha>, one build stream per image'
+  cadence: near-daily
+  entries:
+  - date: '2026-09-04'
+    type: Article
+    component: core
+    title: Who is on the other end, why trust it, what may it do — the multi-robot peer mesh
+    breaking: false
+    highlights: >-
+      Key-based peer identity, six-digit pairing, requests signed against a pinned key, three
+      authorisation gates before a peer can move anything. Discloses two of its own defects: a
+      keyword-based permission check that let a read-only peer drive locomotion, and a safety config
+      flag read by no code.
+  - date: '2026-09-01'
+    type: Article
+    component: core
+    title: 'MHS and PhanthyMotus: what converges when an agent has to move real hardware'
+    breaking: false
+    highlights: Comparison against Anthropic's Model Hardware Standard research preview.
+  - date: '2026-08-31'
+    type: Release
+    component: driver
+    title: Booster K1 joins the platform
+    breaking: false
+    highlights: New bipedal-humanoid driver — walking, gait/mode switching, upper-body joints,
+      preset actions, get-up, trajectory playback, audio and vision, all as callable tools.
+  - date: '2026-08-31'
+    type: Release
+    component: driver
+    title: RealMan RM75-6F-V 7-axis arm driver
+    breaking: false
+    highlights: Pre-move self-check that refuses unsafe commands rather than moving first; motion
+      reports done only on arrival.
+  - date: '2026-08-31'
+    type: Release
+    component: driver
+    title: G1 stand-up and posture reporting fixed
+    breaking: false
+    highlights: Fixes a state machine that bounced between control mode and physical posture.
+  - date: '2026-08-31'
+    type: Release
+    component: driver
+    title: EngineAI T800 gains speaker, gaits, motion recorder
+    breaking: false
+  - date: '2026-08-30'
+    type: Release
+    component: driver
+    title: BrainCo Revo 2 dexterous-hand driver
+    breaking: false
+  - date: '2026-08-29'
+    type: Release
+    component: core
+    title: Feishu channels in group chats, with per-role access control
+    breaking: false
+  - date: '2026-08-28'
+    type: Release
+    component: driver
+    title: RobotEra Q5 waist rotation and gesture fixes
+    breaking: false
+  - date: '2026-08-27'
+    type: Event
+    component: core
+    title: PhanthyMotus goes from open source to co-building
+    breaking: false
+    highlights: Developer incentive programme opened — shared hardware pool for remote debugging and
+      compute tokens for contributors, launched with more than ten embodied-AI hardware makers.
+  - date: '2026-08-27'
+    type: Release
+    component: driver
+    title: ROBOTERA Q5 wheeled humanoid (44 DOF, dexterous hands, LiDAR navigation)
+    breaking: false
+  - date: '2026-08-27'
+    type: Release
+    component: driver
+    title: PNDbotics Adam gains stereo vision and finger-level hand control
+    breaking: false
+  - date: '2026-08-26'
+    type: Release
+    component: perception
+    title: Opt-in GPU speech recognition (~2.5x faster per utterance)
+    breaking: false
+- surface: OpenMLDB
+  url: https://github.com/4paradigm/OpenMLDB/releases
+  scheme: semantic versioning, GitHub Releases with Features / Bug Fixes / Docs sections
+  current_version: v0.9.3
+  cadence: stalled — no release in 18 months as of 2026-09-05
+  entries:
+  - version: v0.9.3
+    date: '2025-02-21'
+    breaking: false
+    highlights: Nested aggregate call performance, gcformat_index UDF for feature signatures,
+      online/offline consistency validation script; fixes in ast_node_converter, Slice reference
+      counting and arm docker builds.
+  - version: v0.9.2
+    date: '2024-07-27'
+    breaking: false
+  - version: v0.9.1
+    date: '2024-07-18'
+    breaking: false
+  - version: v0.9.0
+    date: '2024-04-25'
+    breaking: false
+    highlights: >-
+      Feature signatures — full feature engineering expressed in SQL; server-side authentication
+      introduced as an alpha feature, disabled by default.
+  - version: v0.8.5
+    date: '2024-02-27'
+    breaking: false
+    highlights: Cluster username/password authentication.
+  - version: v0.8.4
+    date: '2023-11-21'
+    breaking: false
+    highlights: ZooKeeper credential support (zk_cert).
+- surface: OpenAIOS-Platform
+  url: https://github.com/4paradigm/openaios-platform
+  scheme: none
+  current_version: 'OpenAPI info.version 0.0.1 (platform) / 0.0.2 (billing)'
+  cadence: dormant — last commit to the default branch 2021-08-20
+  entries: []
+  note: >-
+    No changelog and no release. The OpenAPI documents are the only versioned thing in the repository
+    and both are still on a 0.0.x version.

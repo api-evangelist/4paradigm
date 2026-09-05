@@ -1,0 +1,108 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  derived from the 4xx/5xx responses declared in openapi/ (103 error responses across 57 operations)
+  and enriched from 4Paradigm's own error reference at
+  https://openmldb.ai/docs/en/main/reference/error_code.html (fetched 2026-09-05)
+name: 4Paradigm error catalogue
+format: bespoke
+note: >-
+  Not RFC 9457. 4Paradigm ships three unrelated error shapes across three products, and none of them
+  is a problem+json document. An agent integrating with more than one of them needs three parsers.
+envelopes:
+- surface: OpenAIOS-Platform (Pineapple) and Billing
+  media_type: application/json
+  shape: '{ "type": string, "message": string, "content": object }'
+  required: [message]
+  spec: openapi/4paradigm-openaios-platform.yaml components.responses.RequestError
+  note: >-
+    Only the 400 response uses this JSON shape. 401 and 500 return text/plain — a bare string such as
+    "internal error" or "Something went wrong." — so error handling cannot be uniform even inside one spec.
+- surface: OpenMLDB APIServer (REST)
+  media_type: application/json
+  shape: '{ "code": integer, "msg": string, "data": object }'
+  required: [code, msg]
+  docs: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
+  note: 'code 0 with msg "ok" is success; the docs publish no table of non-zero HTTP-layer codes.'
+- surface: OpenMLDB SDK / CLI (hybridse::sdk::Status and openmldb::base::Status)
+  media_type: n/a
+  shape: 'Error: [<StatusCode>] <message>--ReturnCode[<ReturnCode>]--<message>'
+  docs: https://openmldb.ai/docs/en/main/reference/error_code.html
+  note: >-
+    Two numbering spaces are composed into one string. A StatusCode of 2001 (kServerError) means the
+    real cause is the ReturnCode that follows it, so a client must parse the string to route the error.
+problem_types:
+- id: bad-request
+  status: 400
+  title: Bad request
+  detail: Request failed validation at the platform API.
+  media_type: application/json
+  occurrences: 46
+  source: openapi/4paradigm-openaios-platform.yaml, openapi/4paradigm-openaios-billing.yaml
+  remediation: Read `message`; `type` and `content` are optional and undocumented.
+- id: unauthorized
+  status: 401
+  title: Unauthorized
+  detail: Missing or invalid Authorization header, or an OIDC token the platform rejected.
+  media_type: text/plain
+  source: openapi/4paradigm-openaios-platform.yaml components.responses.401
+  remediation: >-
+    Supply the Authorization header (ApiKeyAuth) or an OIDC bearer token from the operator's own
+    identity provider. The response body is a plain string, not JSON.
+- id: not-found
+  status: 404
+  title: Not found
+  detail: Named environment, application or release does not exist.
+  occurrences: 3
+  source: openapi/4paradigm-openaios-platform.yaml
+- id: conflict
+  status: 409
+  title: Conflict
+  detail: Resource already exists — raised on create-by-name operations.
+  occurrences: 1
+  source: openapi/4paradigm-openaios-platform.yaml
+- id: internal-error
+  status: 500
+  title: Internal error
+  detail: Unhandled server error.
+  media_type: text/plain
+  occurrences: 53
+  source: openapi/4paradigm-openaios-platform.yaml components.responses.ServerError
+  remediation: >-
+    Body is a plain string ("internal error" / "Something went wrong.") carrying no error id, so a 500
+    cannot be correlated with a server log without out-of-band access.
+openmldb_status_codes:
+- code: kRpcError
+  value: 1500
+  meaning: RPC error, or an error inside the RPC response, when talking directly to a tablet server.
+- code: kConnError
+  value: 1501
+  meaning: Client could not connect to the server.
+- code: kCmdError
+  value: 2000
+  meaning: Command-line SQL execution error — typically a parse failure or a failed DELETE.
+- code: kServerError
+  value: 2001
+  meaning: The real error is the ReturnCode that follows in the message.
+openmldb_return_codes:
+- code: kError
+  value: -1
+  meaning: No specific code; read the message.
+- code: kSQLCmdRunError
+  value: 901
+  meaning: Client-side SQL failure — local import/export, CREATE TABLE or CREATE PROCEDURE.
+- code: kSQLCompileError
+  value: 1000
+  meaning: SQL compilation failed inside the tablet server.
+- code: kSQLRunError
+  value: 1001
+  meaning: Tablet server failed while executing a query.
+- code: kRPCRunError
+  value: 1002
+  meaning: Server-side RPC execution error; currently only CREATE/DROP FUNCTION.
+- code: kServerConnError
+  value: 1003
+  meaning: Client could not reach the server — usually the TaskManager is down or unreachable.
+- code: kRPCError
+  value: 1004
+  meaning: Client-side RPC failure carrying a brpc error code — connection interruption or timeout.

@@ -1,0 +1,38 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  searched https://www.4paradigm.com/ and https://en.4paradigm.com/ (including the product and service
+  sections and the sitemap's 414 URLs), https://apps.4paradigm.com/ and its live catalogue API,
+  https://openmldb.ai/docs/en/main/ and https://motus.phanthy.com/ — fetched 2026-09-05
+name: 4Paradigm plans and pricing
+plan_count: 0
+pricing_model: enterprise sales and open source
+note: >-
+  4Paradigm publishes no price for anything. The commercial Sage products (Sage AIOS, Sage HyperCycle
+  ML/CV/OCR, SageGPT, SageOne appliances, Sage Studio, Sage LaunchPad) are sold through a sales and
+  professional-services motion — the only conversion path on the entire site is a phone number and
+  business@4paradigm.com — and every product page routes to contact rather than to a plan. The Sage App
+  Store at apps.4paradigm.com lists 62 models and a set of solutions with no price field anywhere in
+  its catalogue API. The three open-source products are free under Apache-2.0 with no paid tier, no
+  hosted edition, and no commercial support SKU published. There is no self-service sign-up, no free
+  trial page and no metered API to be billed for.
+plans: []
+free_tier:
+  exists: true
+  form: open source
+  detail: >-
+    OpenMLDB, OpenAIOS-Platform and PhanthyMotus are Apache-2.0 and free to run. This is not a plan —
+    there is no account, no quota and no upgrade path attached to it.
+enterprise:
+  contact_only: true
+  contacts:
+  - business@4paradigm.com
+  - '+86.400.898.7788'
+  url: https://www.4paradigm.com/about/contact.html
+internal_metering:
+  present: true
+  detail: >-
+    OpenAIOS-Platform ships a billing API (accounts, balances, compute units and GET
+    /computeunit/price) so an OPERATOR can meter and charge its own internal users. The price list it
+    serves is the operator's, not 4Paradigm's.
+  evidence: openapi/4paradigm-openaios-billing.yaml

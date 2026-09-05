@@ -1,0 +1,31 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  searched https://openmldb.ai/docs/en/main/ (including quickstart/sdk/rest_api.html,
+  deploy/conf.html, maintain/perf_guide.html and faq/), the openaios-platform OpenAPI documents in
+  openapi/, and https://github.com/4paradigm/phanthymotus — fetched 2026-09-05
+name: 4Paradigm rate limits
+limit_count: 0
+note: >-
+  No rate limits are published, and none would be meaningful: every 4Paradigm API surface in this
+  record is self-hosted software the operator runs on its own infrastructure, so the only ceiling is
+  the deployment's own capacity. Nothing throttles at 4Paradigm's edge because 4Paradigm operates no
+  edge. There is also no rate-limit signalling to consume — no X-RateLimit-*, no RateLimit-*, no
+  Retry-After, and no 429 declared in any of the 57 REST operations or 140 RPCs.
+limits: []
+response_headers: []
+status_on_exhaustion: null
+capacity_controls:
+- control: Compute-unit quota
+  surface: OpenAIOS Platform Billing API
+  detail: >-
+    Compute units are assigned per user and per group and priced (GET /computeunit/price), so an
+    operator can cap consumption by account. This is a metering and chargeback mechanism, not a request
+    rate limit, and the caps are set by the operator rather than published by 4Paradigm.
+  evidence: openapi/4paradigm-openaios-billing.yaml
+- control: Server-side thread and connection configuration
+  surface: OpenMLDB
+  detail: >-
+    Concurrency is tuned through the deployment's own configuration (thread_pool_size, request timeouts,
+    brpc settings) rather than enforced as a published quota.
+  evidence: https://openmldb.ai/docs/en/main/deploy/conf.html
