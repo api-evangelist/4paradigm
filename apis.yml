@@ -1,17 +1,14 @@
 aid: 4paradigm
 name: 4Paradigm
-description: >-
-  4Paradigm (Beijing Fourth Paradigm Intelligent Technology, HKEX 6682) is a Chinese
-  enterprise AI company building decision-making and generative AI platforms — the Sage
-  AIOS AI operating system, Sage HyperCycle ML/CV/OCR, SageGPT and the SageOne AI
-  computing appliances — for banking, insurance, securities, retail, energy, healthcare
-  and manufacturing. Its public, machine-readable API surface is published almost
-  entirely through its open-source community at github.com/4paradigm: OpenMLDB, an
-  Apache-2.0 machine-learning feature database with a documented REST APIServer,
-  Protobuf/brpc cluster services and Java/Python/Go/C++ SDKs; OpenAIOS-Platform
-  (Pineapple), a Kubernetes-based AI development platform that ships OpenAPI 3.0.3
-  contracts; and PhanthyMotus, an MCP-native embodied-AI agent framework whose hardware
-  drivers are Model Context Protocol servers.
+description: '4Paradigm (Beijing Fourth Paradigm Intelligent Technology, HKEX 6682) is a Chinese enterprise
+  AI company building decision-making and generative AI platforms — the Sage AIOS AI operating system,
+  Sage HyperCycle ML/CV/OCR, SageGPT and the SageOne AI computing appliances — for banking, insurance,
+  securities, retail, energy, healthcare and manufacturing. Its public, machine-readable API surface is
+  published almost entirely through its open-source community at github.com/4paradigm: OpenMLDB, an Apache-2.0
+  machine-learning feature database with a documented REST APIServer, Protobuf/brpc cluster services and
+  Java/Python/Go/C++ SDKs; OpenAIOS-Platform (Pineapple), a Kubernetes-based AI development platform that
+  ships OpenAPI 3.0.3 contracts; and PhanthyMotus, an MCP-native embodied-AI agent framework whose hardware
+  drivers are Model Context Protocol servers.'
 url: https://raw.githubusercontent.com/api-evangelist/4paradigm/refs/heads/main/apis.yml
 image: https://www.4paradigm.com/images/logo.png
 x-type: company
@@ -20,6 +17,17 @@ specificationVersion: '0.20'
 created: '2026-09-05'
 modified: '2026-09-05'
 tags:
+- Company
+- Artificial Intelligence
+- Machine-Learning
+- Feature Store
+- Databases
+- Open-Source
+- MLOps
+- Agents
+- Robotics
+- Kubernetes
+tags_raw:
 - Company
 - Artificial Intelligence
 - Machine Learning
@@ -36,18 +44,21 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- aid: 4paradigm-openmldb-apiserver
+- aid: 4paradigm:4paradigm-openmldb-apiserver
   image: https://raw.githubusercontent.com/4paradigm/OpenMLDB/main/docs/zh/about/images/openmldb_logo.png
   name: OpenMLDB APIServer REST API
-  description: >-
-    The HTTP/JSON surface of OpenMLDB's optional APIServer module — insert rows into a
-    table, invoke a deployed real-time feature-computation service, run online/offline SQL,
-    read deployment and table metadata, and refresh the metadata cache. OpenMLDB is
-    self-hosted, so the base URL is whatever host the operator runs APIServer on; the
-    provider's own examples use http://127.0.0.1:8080.
+  description: The HTTP/JSON surface of OpenMLDB's optional APIServer module — insert rows into a table,
+    invoke a deployed real-time feature-computation service, run online/offline SQL, read deployment and
+    table metadata, and refresh the metadata cache. OpenMLDB is self-hosted, so the base URL is whatever
+    host the operator runs APIServer on; the provider's own examples use http://127.0.0.1:8080.
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Machine-Learning
+  - Feature Store
+  - Databases
+  - SQL
+  tags_raw:
   - Machine Learning
   - Feature Store
   - Databases
@@ -59,17 +70,19 @@ apis:
     url: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   - type: SourceCode
     url: https://github.com/4paradigm/OpenMLDB
-- aid: 4paradigm-openmldb-cluster-rpc
+- aid: 4paradigm:4paradigm-openmldb-cluster-rpc
   image: https://raw.githubusercontent.com/4paradigm/OpenMLDB/main/docs/zh/about/images/openmldb_logo.png
   name: OpenMLDB Cluster RPC Services
-  description: >-
-    The Protobuf/brpc service contracts behind an OpenMLDB cluster — TabletServer,
-    NameServer, TaskManager, the data-sync services and the APIServer HTTP bridge —
-    published verbatim in the OpenMLDB source tree under src/proto/. 140 RPCs across
-    six services.
+  description: The Protobuf/brpc service contracts behind an OpenMLDB cluster — TabletServer, NameServer,
+    TaskManager, the data-sync services and the APIServer HTTP bridge — published verbatim in the OpenMLDB
+    source tree under src/proto/. 140 RPCs across six services.
   humanURL: https://github.com/4paradigm/OpenMLDB/tree/main/src/proto
   baseURL: http://127.0.0.1:6527
   tags:
+  - Machine-Learning
+  - Databases
+  - gRPC
+  tags_raw:
   - Machine Learning
   - Databases
   - gRPC
@@ -92,15 +105,13 @@ apis:
     url: grpc/4paradigm-openmldb-type.proto
   - type: SourceCode
     url: https://github.com/4paradigm/OpenMLDB
-- aid: 4paradigm-openaios-platform
+- aid: 4paradigm:4paradigm-openaios-platform
   image: https://www.4paradigm.com/images/logo.png
   name: OpenAIOS Platform API (Pineapple)
-  description: >-
-    The REST API of OpenAIOS-Platform, 4Paradigm's Kubernetes-based AI development
-    platform — environments, applications, Helm releases, the app store, container images,
-    object storage, competitions, container logs and web terminals. Published as OpenAPI
-    3.0.3 in the openaios-platform repository; self-hosted, so servers[] names the
-    in-cluster loopback the provider shipped.
+  description: The REST API of OpenAIOS-Platform, 4Paradigm's Kubernetes-based AI development platform
+    — environments, applications, Helm releases, the app store, container images, object storage, competitions,
+    container logs and web terminals. Published as OpenAPI 3.0.3 in the openaios-platform repository;
+    self-hosted, so servers[] names the in-cluster loopback the provider shipped.
   humanURL: https://github.com/4paradigm/openaios-platform
   baseURL: http://127.0.0.1:1234/api
   tags:
@@ -122,13 +133,12 @@ apis:
     url: overlays/4paradigm-openaios-webterminal-overlay.yaml
   - type: SourceCode
     url: https://github.com/4paradigm/openaios-platform
-- aid: 4paradigm-openaios-billing
+- aid: 4paradigm:4paradigm-openaios-billing
   image: https://www.4paradigm.com/images/logo.png
   name: OpenAIOS Platform Billing API
-  description: >-
-    The metering and billing service of OpenAIOS-Platform — user accounts, account
-    balances, compute-unit assignment by user and group, and compute-unit pricing.
-    Published as OpenAPI 3.0.3 in the openaios-platform repository.
+  description: The metering and billing service of OpenAIOS-Platform — user accounts, account balances,
+    compute-unit assignment by user and group, and compute-unit pricing. Published as OpenAPI 3.0.3 in
+    the openaios-platform repository.
   humanURL: https://github.com/4paradigm/openaios-platform/blob/master/doc/api/billing.yaml
   baseURL: http://127.0.0.1:4321/api
   tags:
@@ -142,15 +152,14 @@ apis:
     url: overlays/4paradigm-openaios-billing-overlay.yaml
   - type: SourceCode
     url: https://github.com/4paradigm/openaios-platform
-- aid: 4paradigm-sage-app-store
+- aid: 4paradigm:4paradigm-sage-app-store
   image: https://www.4paradigm.com/images/logo.png
   name: Sage App Store Catalogue API
-  description: >-
-    The read-only JSON API behind 4Paradigm's Sage App Store — the model catalogue (62 AI models with
-    version, category and short description), the self-referencing category tree, the solutions list,
-    the featured-highlights set and the home-page banners. Undocumented and unadvertised, but live,
+  description: 'The read-only JSON API behind 4Paradigm''s Sage App Store — the model catalogue (62 AI
+    models with version, category and short description), the self-referencing category tree, the solutions
+    list, the featured-highlights set and the home-page banners. Undocumented and unadvertised, but live,
     unauthenticated and answering on the public internet: the only 4Paradigm API surface in this record
-    that an agent can call today without deploying anything.
+    that an agent can call today without deploying anything.'
   humanURL: https://apps.4paradigm.com/
   baseURL: https://apps.4paradigm.com/api
   tags:
@@ -162,15 +171,13 @@ apis:
     url: data-model/4paradigm-data-model.yml
   - type: Portal
     url: https://apps.4paradigm.com/
-- aid: 4paradigm-phanthymotus
+- aid: 4paradigm:4paradigm-phanthymotus
   image: https://www.4paradigm.com/images/logo.png
   name: PhanthyMotus Agent Core and Driver MCP Bus
-  description: >-
-    PhanthyMotus is 4Paradigm's open-source embodied-AI agent framework. Every hardware
-    driver bundle is a Model Context Protocol server exposing typed cards — sensor,
-    actuator, processor and resource — which the Agent Core consumes over a unified MCP
-    data bus. Sixteen driver bundles are published with machine-readable driver.yaml
-    manifests declaring the MCP URL and the cards each bundle exposes.
+  description: PhanthyMotus is 4Paradigm's open-source embodied-AI agent framework. Every hardware driver
+    bundle is a Model Context Protocol server exposing typed cards — sensor, actuator, processor and resource
+    — which the Agent Core consumes over a unified MCP data bus. Sixteen driver bundles are published
+    with machine-readable driver.yaml manifests declaring the MCP URL and the cards each bundle exposes.
   humanURL: https://motus.phanthy.com/en/drivers
   baseURL: http://localhost:15678
   tags:
