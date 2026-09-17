@@ -177,18 +177,6 @@ apis:
     url: openapi/4paradigm-applications-api-openapi.yml
   - type: SourceCode
     url: https://github.com/4paradigm/openaios-platform
-- aid: 4paradigm:4paradigm-appstore-api
-  name: 4Paradigm Appstore API
-  description: The appstore API from 4Paradigm — 3 operation(s) for appstore.
-  humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
-  baseURL: http://127.0.0.1:8080
-  tags:
-  - appstore
-  properties:
-  - type: OpenAPI
-    url: openapi/4paradigm-appstore-api-openapi.yml
-  - type: SourceCode
-    url: https://github.com/4paradigm/openaios-platform
 - aid: 4paradigm:4paradigm-competition-api
   name: 4Paradigm Competition API
   description: The competition API from 4Paradigm — 3 operation(s) for competition.
@@ -307,6 +295,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/4paradigm-users-api-openapi.yml
+  - type: SourceCode
+    url: https://github.com/4paradigm/openaios-platform
+- aid: 4paradigm:4paradigm-app-store-api
+  name: 4Paradigm App Store API
+  description: The App Store API from 4Paradigm — 3 operation(s) for app store.
+  humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
+  baseURL: http://127.0.0.1:8080
+  tags:
+  - App Store
+  properties:
+  - type: OpenAPI
+    url: openapi/4paradigm-app-store-api-openapi.yml
   - type: SourceCode
     url: https://github.com/4paradigm/openaios-platform
 common:
