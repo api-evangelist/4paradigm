@@ -21,7 +21,7 @@ tags:
 - Artificial Intelligence
 - Machine-Learning
 - Feature Store
-- Databases
+- Database
 - Open-Source
 - MLOps
 - Agents
@@ -58,7 +58,7 @@ apis:
   tags:
   - Machine-Learning
   - Feature Store
-  - Databases
+  - Database
   - SQL
   tags_raw:
   - Machine Learning
@@ -84,7 +84,7 @@ apis:
   baseURL: http://127.0.0.1:6527
   tags:
   - Machine-Learning
-  - Databases
+  - Database
   - gRPC
   tags_raw:
   - Machine Learning
@@ -159,6 +159,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Account
+  tags_raw:
   - account
   properties:
   - type: OpenAPI
@@ -171,6 +173,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Application
+  tags_raw:
   - applications
   properties:
   - type: OpenAPI
@@ -183,6 +187,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Competitions
+  tags_raw:
   - competition
   properties:
   - type: OpenAPI
@@ -206,7 +212,8 @@ apis:
   description: The computing_resource API from 4Paradigm — 1 operation(s) for computing_resource.
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
-  tags:
+  tags: []
+  tags_raw:
   - computing_resource
   properties:
   - type: OpenAPI
@@ -219,6 +226,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Environment
+  tags_raw:
   - environments
   properties:
   - type: OpenAPI
@@ -243,6 +252,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Image
+  tags_raw:
   - images
   properties:
   - type: OpenAPI
@@ -255,6 +266,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Logs
+  tags_raw:
   - logs
   properties:
   - type: OpenAPI
@@ -267,6 +280,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Releases
+  tags_raw:
   - releases
   properties:
   - type: OpenAPI
@@ -279,6 +294,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - Storage
+  tags_raw:
   - storage
   properties:
   - type: OpenAPI
@@ -291,6 +308,8 @@ apis:
   humanURL: https://openmldb.ai/docs/en/main/quickstart/sdk/rest_api.html
   baseURL: http://127.0.0.1:8080
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
