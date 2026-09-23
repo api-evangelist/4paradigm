@@ -1,0 +1,39 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Finished API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: finished
+paths:
+  /version:
+    get:
+      tags:
+      - finished
+      summary: image version
+      operationId: PineappleVersion
+      security: []
+      responses:
+        200:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

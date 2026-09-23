@@ -1,0 +1,188 @@
+openapi: 3.2.0
+info:
+  title: Pineapple-billing Computeunit API
+  description: Pineapple-billing
+  version: 0.0.2
+servers:
+- url: http://127.0.0.1:4321/api
+security:
+- ApiKeyAuth: []
+tags:
+- name: computeunit
+paths:
+  /computeunit/{userid}:
+    parameters:
+    - in: path
+      name: userid
+      schema:
+        type: string
+    get:
+      tags:
+      - computeunit
+      summary: get computeunit list
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComputeunitInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getComputeunitByUserid
+      x-operation-id-source: derived
+    post:
+      tags:
+      - computeunit
+      summary: add computeunit group to user account
+      parameters:
+      - in: query
+        name: group_name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: postComputeunitByUserid
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - computeunit
+      summary: delete computeunit group of user account
+      parameters:
+      - in: query
+        name: group_name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: deleteComputeunitByUserid
+      x-operation-id-source: derived
+  /computeunit/{userid}/computeunit_id/{computeunit_id}:
+    parameters:
+    - in: path
+      name: userid
+      schema:
+        type: string
+    - in: path
+      name: computeunit_id
+      schema:
+        type: string
+    get:
+      tags:
+      - computeunit
+      summary: get single compueunit by userID and computeunitID
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputeunitInfo'
+      operationId: getComputeunitByUseridComputeunitIdByComputeunitId
+      x-operation-id-source: derived
+  /computeunit/group/{group_name}:
+    parameters:
+    - in: path
+      name: group_name
+      schema:
+        type: string
+    get:
+      tags:
+      - computeunit
+      summary: get computeunit list in group
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComputeunitInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getComputeunitGroupByGroupName
+      x-operation-id-source: derived
+  /computeunit/price:
+    get:
+      tags:
+      - computeunit
+      summary: get computeunit price
+      parameters:
+      - in: query
+        name: computeunit_id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+                format: double
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getComputeunitPrice
+      x-operation-id-source: derived
+components:
+  responses:
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    ComputeunitInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        price:
+          type: number
+          format: double
+        description:
+          type: string
+        spec:
+          type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

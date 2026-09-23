@@ -1,0 +1,380 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Images API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: Images
+paths:
+  /images/importing:
+    get:
+      tags:
+      - Images
+      summary: List importing images
+      operationId: ListImportingImages
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageImportingInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+      - Images
+      summary: Import images
+      parameters:
+      - in: query
+        name: registryId
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: image registry id
+      - in: query
+        name: repo
+        schema:
+          $ref: '#/components/schemas/ImageRepo'
+        required: true
+      - in: query
+        name: tag
+        schema:
+          $ref: '#/components/schemas/ImageTag'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: postImagesImporting
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Images
+      summary: Remove importing from list
+      parameters:
+      - in: query
+        name: importing_id
+        schema:
+          $ref: '#/components/schemas/ImageImportingId'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: deleteImagesImporting
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Images
+      summary: Stop importing
+      parameters:
+      - in: query
+        name: importing_id
+        schema:
+          $ref: '#/components/schemas/ImageImportingId'
+        required: true
+        description: importing id to stop
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: putImagesImporting
+      x-operation-id-source: derived
+  /images/registry:
+    get:
+      tags:
+      - Images
+      summary: Get registry list
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageRegistryInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getImagesRegistry
+      x-operation-id-source: derived
+  /public_images/info:
+    get:
+      tags:
+      - Images
+      summary: Get public project info
+      parameters:
+      - in: query
+        name: filter
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUserInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getPublicImagesInfo
+      x-operation-id-source: derived
+  /public_images:
+    get:
+      tags:
+      - Images
+      summary: Get public images
+      parameters:
+      - in: query
+        name: filter
+        schema:
+          type: string
+      - in: query
+        name: page
+        schema:
+          type: integer
+          format: int64
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getPublicImages
+      x-operation-id-source: derived
+  /images/info:
+    get:
+      tags:
+      - Images
+      summary: Get user project info
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUserInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getImagesInfo
+      x-operation-id-source: derived
+  /images:
+    get:
+      tags:
+      - Images
+      summary: Get images
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+          format: int64
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getImages
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Images
+      summary: Copy image
+      parameters:
+      - in: query
+        name: src_repo
+        schema:
+          $ref: '#/components/schemas/ImageRepo'
+        required: true
+      - in: query
+        name: dest_repo
+        schema:
+          $ref: '#/components/schemas/ImageRepo'
+        required: true
+      - in: query
+        name: tag
+        schema:
+          $ref: '#/components/schemas/ImageTag'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: putImages
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Images
+      summary: Delete image
+      parameters:
+      - in: query
+        name: repo
+        schema:
+          $ref: '#/components/schemas/ImageRepo'
+        required: true
+      - in: query
+        name: reference
+        schema:
+          type: string
+        description: tag or digest
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: deleteImages
+      x-operation-id-source: derived
+components:
+  responses:
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    ImageImportingInfo:
+      description: import image info
+      type: object
+      properties:
+        registry:
+          $ref: '#/components/schemas/ImageRegistryInfo'
+        repo:
+          $ref: '#/components/schemas/ImageRepo'
+        tag:
+          $ref: '#/components/schemas/ImageTag'
+        status:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        importing_id:
+          $ref: '#/components/schemas/ImageImportingId'
+    ImageRegistryInfo:
+      description: image registry info
+      type: object
+      properties:
+        url:
+          type: string
+        id:
+          type: integer
+          format: int64
+    ImageRepo:
+      description: image repo
+      type: string
+    ProjectUserInfo:
+      description: user repo info
+      type: object
+      properties:
+        image_count:
+          type: integer
+          format: int64
+    ImageImportingId:
+      description: image importing ID
+      type: integer
+      format: int64
+    ImageInfo:
+      description: image info
+      type: object
+      properties:
+        repo:
+          $ref: '#/components/schemas/ImageRepo'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageTag'
+        digest:
+          type: string
+        size:
+          type: string
+        importing_time:
+          type: string
+          format: date-time
+    ImageTag:
+      description: image tag
+      type: string
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

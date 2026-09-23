@@ -1,0 +1,64 @@
+{
+  "provider": "4paradigm",
+  "sources": [
+    "_original/4paradigm-openaios-billing.yaml",
+    "_original/4paradigm-openaios-platform-internal.yaml",
+    "_original/4paradigm-openaios-platform.yaml",
+    "_original/4paradigm-openaios-webterminal.yaml"
+  ],
+  "outputs": [
+    "4paradigm-account-api-openapi.yml",
+    "4paradigm-computeunit-api-openapi.yml",
+    "4paradigm-releases-api-openapi.yml",
+    "4paradigm-applications-api-openapi.yml",
+    "4paradigm-appstore-api-openapi.yml",
+    "4paradigm-competition-api-openapi.yml",
+    "4paradigm-computing-resource-api-openapi.yml",
+    "4paradigm-environments-api-openapi.yml",
+    "4paradigm-finished-api-openapi.yml",
+    "4paradigm-images-api-openapi.yml",
+    "4paradigm-logs-api-openapi.yml",
+    "4paradigm-storage-api-openapi.yml",
+    "4paradigm-users-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "4 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "4paradigm-openaios-billing.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "4paradigm-openaios-billing.yaml: declared missing tag: account",
+    "4paradigm-openaios-billing.yaml: declared missing tag: computeunit",
+    "4paradigm-openaios-platform-internal.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "4paradigm-openaios-platform-internal.yaml: multi-axis tagging (2 tags, 1 first tags, 2.00x duplication over 1 operations) \u2014 split on first tag, 1 operations narrowed",
+    "4paradigm-openaios-platform.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "4paradigm-openaios-platform.yaml: multi-axis tagging (11 tags, 11 first tags, 1.88x duplication over 43 operations) \u2014 split on first tag, 38 operations narrowed",
+    "4paradigm-openaios-webterminal.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "4paradigm-openaios-webterminal.yaml: multi-axis tagging (2 tags, 1 first tags, 2.00x duplication over 1 operations) \u2014 split on first tag, 1 operations narrowed",
+    "tag 'releases' spans 3 source specs (4paradigm-openaios-platform-internal.yaml, 4paradigm-openaios-platform.yaml, 4paradigm-openaios-webterminal.yaml): per-path servers applied",
+    "superseded outputs removed: 4paradigm-app-store-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 17 total)"
+  ],
+  "skipped": [
+    "_original/4paradigm-openaios-webterminal_2.yaml: archived document superseded by a larger archived document",
+    "_original/4paradigm-openaios-platform_2.yaml: archived document superseded by a larger archived document",
+    "_original/4paradigm-openaios-platform-internal_2.yaml: archived document superseded by a larger archived document",
+    "_original/4paradigm-openaios-billing_2.yaml: archived document superseded by a larger archived document",
+    "4paradigm-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-app-store-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-competition-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-computeunit-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-computing-resource-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-environments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-finished-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-storage-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "4paradigm-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

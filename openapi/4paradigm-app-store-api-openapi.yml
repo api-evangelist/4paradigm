@@ -1,0 +1,178 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Appstore API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: App Store
+paths:
+  /appstore/charts:
+    get:
+      tags:
+      - App Store
+      summary: Get chart list
+      operationId: getAppstoreChartList
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChartMetaDataList'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /appstore/charts/{category}:
+    parameters:
+    - in: path
+      name: category
+      schema:
+        $ref: '#/components/schemas/ChartCategory'
+      required: true
+      description: chart repo
+    post:
+      tags:
+      - App Store
+      summary: Upload chart
+      operationId: uploadChart
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  $ref: '#/components/schemas/FileType'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /appstore/charts/{category}/{name}/{version}:
+    parameters:
+    - in: path
+      name: category
+      schema:
+        $ref: '#/components/schemas/ChartCategory'
+      required: true
+      description: chart repo
+    - in: path
+      name: name
+      schema:
+        type: string
+      required: true
+      description: chart name
+    - in: path
+      name: version
+      schema:
+        type: string
+      required: true
+      description: chart version
+    get:
+      tags:
+      - App Store
+      summary: Get a chart
+      operationId: getAppstoreChart
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chart'
+        500:
+          $ref: '#/components/responses/ServerError'
+components:
+  responses:
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    ChartFiles:
+      description: chart files
+      type: object
+      additionalProperties:
+        type: string
+        format: byte
+    FileType:
+      description: file type for upload and Download
+      type: string
+      format: binary
+    Chart:
+      description: chart
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ChartMetadata'
+        files:
+          $ref: '#/components/schemas/ChartFiles'
+        version_list:
+          type: array
+          items:
+            type: string
+    ChartMetadata:
+      description: chart metadata
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        url:
+          type: string
+        icon_link:
+          type: string
+        category:
+          $ref: '#/components/schemas/ChartCategory'
+    ChartCategory:
+      description: chart repo category
+      type: string
+      enum:
+      - public-official
+      - public-practical
+      - public-community
+      - private
+    ChartMetaDataList:
+      description: chart metadata list
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChartMetadata'
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

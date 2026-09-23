@@ -1,0 +1,63 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Computing Resource API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: computing_resource
+paths:
+  /computing_resource/specs:
+    get:
+      tags:
+      - computing_resource
+      summary: Get computing unit specifications
+      operationId: GetComputingUnitSpecs
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComputeUnitSpec'
+components:
+  schemas:
+    ComputeUnitSpec:
+      description: compute unit spec
+      type: object
+      properties:
+        name:
+          type: string
+          description: compute unit spec
+          example: Free CPU
+        id:
+          $ref: '#/components/schemas/ComputeUnitId'
+        price:
+          type: number
+          format: double
+          description: price
+          example: 15.0
+        description:
+          type: string
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

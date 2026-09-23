@@ -1,0 +1,268 @@
+openapi: 3.2.0
+info:
+  title: 4paradigm Releases API
+  version: 0.0.1
+  description: 'Operations tagged releases across 3 of this provider''s published API definitions: 4paradigm-openaios-platform-internal.yaml, 4paradigm-openaios-platform.yaml, 4paradigm-openaios-webterminal.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: http://127.0.0.1:1234/internal-api
+- url: http://127.0.0.1:1234/api
+- url: http://127.0.0.1:1234/web-terminal
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: Releases
+paths:
+  /releases:
+    delete:
+      parameters:
+      - in: query
+        name: user
+        schema:
+          type: string
+        description: userID
+      tags:
+      - Releases
+      summary: Delete all releases
+      operationId: deleteReleases
+      responses:
+        200:
+          description: OK
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+    servers:
+    - url: http://127.0.0.1:1234/internal-api
+  /releases/{name}:
+    parameters:
+    - in: path
+      name: name
+      schema:
+        $ref: '#/components/schemas/ReleaseName'
+      required: true
+      description: release name
+    get:
+      tags:
+      - Releases
+      summary: Get information from specific release
+      operationId: getRelease
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    $ref: '#/components/schemas/ReleaseName'
+                  summary:
+                    $ref: '#/components/schemas/ShortDescription'
+                  description:
+                    $ref: '#/components/schemas/LongDescription'
+                  pods:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KubernetesPod'
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KubernetesService'
+        404:
+          description: Release not found
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+      - Releases
+      summary: Create a release
+      operationId: createRelease
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReleaseCreateConfig'
+      responses:
+        200:
+          description: OK
+        409:
+          description: Duplicated environment name
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+      - Releases
+      summary: Delete a release
+      operationId: deleteRelease
+      responses:
+        200:
+          description: OK
+        404:
+          description: Release not found
+        500:
+          $ref: '#/components/responses/ServerError'
+    servers:
+    - url: http://127.0.0.1:1234/api
+  /terminal:
+    get:
+      parameters:
+      - in: query
+        name: pod
+        required: true
+        schema:
+          type: string
+        description: podName
+      - in: query
+        name: container
+        required: true
+        schema:
+          type: string
+        description: containerName
+      tags:
+      - Releases
+      summary: Get web-terminal url
+      operationId: getTerminal
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebterminalInfo'
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+    servers:
+    - url: http://127.0.0.1:1234/web-terminal
+components:
+  responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    KubernetesService:
+      description: service schema
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ServiceName'
+        cluster_ip:
+          type: string
+          format: ipv4
+        port:
+          type: string
+          format: port
+        node_port:
+          type: string
+          format: port
+    PodState:
+      type: string
+    PodName:
+      description: pod name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    ShortDescription:
+      description: short description excluding newlines
+      type: string
+    ContainerState:
+      type: string
+    ReleaseName:
+      description: release name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    ServiceName:
+      description: service name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    LongDescription:
+      description: long description including newlines
+      type: string
+    KubernetesPod:
+      description: pod schema
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/PodName'
+        ip:
+          type: string
+          format: ipv4
+        state:
+          $ref: '#/components/schemas/PodState'
+        compute_unit:
+          $ref: '#/components/schemas/ComputeUnitId'
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/KubernetesContainer'
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
+    ReleaseCreateConfig:
+      description: metadata to create a release
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ReleaseName'
+        chart_name:
+          $ref: '#/components/schemas/ChartName'
+        value_encode:
+          description: utf-8 encoded value.yaml file
+          type: string
+          format: binary
+    ChartName:
+      description: chart name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    KubernetesContainer:
+      description: container schema
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ContainerName'
+        state:
+          $ref: '#/components/schemas/ContainerState'
+        image:
+          $ref: '#/components/schemas/ImageName'
+    ContainerName:
+      description: container name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    ImageName:
+      description: image name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 64
+    WebterminalInfo:
+      description: user login information
+      type: object
+      properties:
+        url:
+          type: string
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+x-refined-from:
+- 4paradigm-openaios-platform-internal.yaml
+- 4paradigm-openaios-platform.yaml
+- 4paradigm-openaios-webterminal.yaml

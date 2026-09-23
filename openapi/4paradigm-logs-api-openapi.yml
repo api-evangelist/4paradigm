@@ -1,0 +1,95 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Logs API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: Logs
+paths:
+  /log/pod/{pod_name}:
+    get:
+      tags:
+      - Logs
+      summary: get container log
+      operationId: GetContainerLog
+      parameters:
+      - in: path
+        name: pod_name
+        schema:
+          $ref: '#/components/schemas/PodName'
+        required: true
+        description: pod name in kubernetes
+      - in: query
+        name: container_name
+        schema:
+          $ref: '#/components/schemas/ContainerName'
+        required: false
+        description: container name in kubernetes
+      - in: query
+        name: tail_lines
+        schema:
+          type: integer
+          format: int64
+        required: false
+        description: tail lines of the log
+      responses:
+        200:
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+components:
+  responses:
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    ContainerName:
+      description: container name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    PodName:
+      description: pod name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

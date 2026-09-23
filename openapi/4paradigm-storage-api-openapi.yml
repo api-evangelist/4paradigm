@@ -1,0 +1,186 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Storage API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: Storage
+paths:
+  /storage:
+    get:
+      tags:
+      - Storage
+      summary: Get directory
+      operationId: getDirectory
+      parameters:
+      - in: query
+        name: path
+        schema:
+          $ref: '#/components/schemas/PosixPath'
+        required: false
+        description: Directory path
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+      - Storage
+      summary: Create directory
+      operationId: createDirectory
+      parameters:
+      - in: query
+        name: path
+        schema:
+          $ref: '#/components/schemas/PosixPath'
+        required: true
+        description: File or Directory path
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+      - Storage
+      summary: Delete directory or file
+      operationId: deleteDirectoryOrFile
+      parameters:
+      - in: query
+        name: path
+        schema:
+          $ref: '#/components/schemas/PosixPath'
+        required: true
+        description: Directory path
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /storage/upload:
+    post:
+      tags:
+      - Storage
+      summary: Upload File
+      parameters:
+      - in: query
+        name: path
+        schema:
+          $ref: '#/components/schemas/PosixPath'
+        required: false
+        description: Destination directory
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  $ref: '#/components/schemas/FileType'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: postStorageUpload
+      x-operation-id-source: derived
+  /storage/download:
+    parameters:
+    - in: query
+      name: path
+      schema:
+        $ref: '#/components/schemas/PosixPath'
+      required: true
+      description: Source path
+    get:
+      tags:
+      - Storage
+      summary: Download File
+      responses:
+        200:
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/FileType'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getStorageDownload
+      x-operation-id-source: derived
+components:
+  responses:
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    FileType:
+      description: file type for upload and Download
+      type: string
+      format: binary
+    FileInfo:
+      description: file or directory info
+      type: object
+      properties:
+        name:
+          type: string
+        is_dir:
+          type: boolean
+        size:
+          type: string
+        modification_time:
+          type: string
+          format: date-time
+    PosixPath:
+      description: posix path for directory or file
+      type: string
+      maxLength: 256
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

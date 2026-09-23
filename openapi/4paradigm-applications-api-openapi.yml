@@ -1,0 +1,330 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Applications API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: Applications
+paths:
+  /applications:
+    get:
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        description: The number of items to skip before starting to collect the result set
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The numbers of items to return
+      tags:
+      - Applications
+      summary: Get application list
+      operationId: getApplicationList
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationList'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /applications/{name}:
+    parameters:
+    - in: path
+      name: name
+      schema:
+        type: string
+      required: true
+      description: application name
+    post:
+      tags:
+      - Applications
+      summary: Create an app
+      operationId: createApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationConfig'
+      responses:
+        200:
+          description: OK
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+      - Applications
+      summary: Delete an application instance
+      operationId: deleteApplication
+      responses:
+        200:
+          description: OK
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+  /applications/{name}/metadata:
+    parameters:
+    - in: path
+      name: name
+      schema:
+        type: string
+      required: true
+      description: application name
+    get:
+      tags:
+      - Applications
+      summary: Gets a application metadata
+      operationId: getApplicationMetadata
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationInstanceMetadata'
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+  /applications/{name}/pods:
+    parameters:
+    - in: path
+      name: name
+      schema:
+        type: string
+      required: true
+      description: application name
+    get:
+      tags:
+      - Applications
+      summary: Gets a application pods
+      operationId: getApplicationPods
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationInstancePodList'
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+  /applications/{name}/services:
+    parameters:
+    - in: path
+      name: name
+      schema:
+        type: string
+      required: true
+      description: application name
+    get:
+      tags:
+      - Applications
+      summary: Gets a application services
+      operationId: getApplicationServices
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationInstanceServiceList'
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+  /applications/{name}/notes:
+    parameters:
+    - in: path
+      name: name
+      schema:
+        type: string
+      required: true
+      description: application name
+    get:
+      tags:
+      - Applications
+      summary: Gets application notes
+      operationId: getApplicationNotes
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notes:
+                    type: string
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    ApplicationInstanceService:
+      description: application instance pod
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        cluster_ip:
+          type: string
+        external_ips:
+          type: array
+          items:
+            type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              port:
+                type: string
+              node_port:
+                type: string
+              protocol:
+                type: string
+    ApplicationInstanceEvent:
+      description: application instance event
+      type: object
+      properties:
+        type:
+          type: string
+        reason:
+          type: string
+        age:
+          type: string
+        from:
+          type: string
+        message:
+          type: string
+    ApplicationConfig:
+      description: metadata to create an application instance
+      type: object
+      properties:
+        url:
+          type: string
+        answers:
+          type: object
+    ApplicationInstanceContainer:
+      description: application instance container
+      type: object
+      properties:
+        name:
+          type: string
+        image:
+          type: string
+        state:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              container_port:
+                type: string
+              protocol:
+                type: string
+    ApplicationInstancePod:
+      description: application instance pod
+      type: object
+      properties:
+        name:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstanceEvent'
+        state:
+          type: string
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstanceContainer'
+        create_tm:
+          type: string
+          format: date-time
+          example: 2017-07-21 17:32:28+00:00
+    ApplicationInstancePodList:
+      description: application instance pod list
+      type: object
+      properties:
+        total:
+          type: integer
+        item:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstancePod'
+    ApplicationInstanceServiceList:
+      description: application instance service list
+      type: object
+      properties:
+        total:
+          type: integer
+        item:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstanceService'
+    ApplicationInstanceMetadata:
+      description: application instance
+      type: object
+      properties:
+        instance_name:
+          type: string
+        chart_name:
+          type: string
+        chart_version:
+          type: string
+        create_tm:
+          type: string
+          format: date-time
+          example: 2017-07-21 17:32:28+00:00
+        status:
+          type: string
+    ApplicationList:
+      description: application instance list
+      type: object
+      properties:
+        total:
+          type: integer
+        item:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstanceMetadata'
+  responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

@@ -1,0 +1,251 @@
+openapi: 3.2.0
+info:
+  title: Pineapple Environments API
+  description: Pineapple
+  version: 0.0.1
+servers:
+- url: http://127.0.0.1:1234/api
+security:
+- OpenID:
+  - openid
+  - email
+  - profile
+- ApiKeyAuth: []
+tags:
+- name: Environments
+paths:
+  /environments:
+    parameters:
+    - in: query
+      name: offset
+      schema:
+        type: integer
+      description: The number of items to skip before starting to collect the result set
+    - in: query
+      name: limit
+      schema:
+        type: integer
+      description: The numbers of items to return
+    get:
+      tags:
+      - Environments
+      summary: Gets environment list
+      operationId: getEnvironmentList
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentRuntimeInfos'
+  /environments/{name}:
+    parameters:
+    - in: path
+      name: name
+      schema:
+        $ref: '#/components/schemas/EnvironmentName'
+      required: true
+      description: Name of environment
+    get:
+      tags:
+      - Environments
+      summary: Gets environment
+      operationId: getEnvironment
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentRuntimeInfo'
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+      - Environments
+      summary: Create an environment
+      operationId: createEnvironment
+      requestBody:
+        description: Information about creating an environment
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentConfig'
+      responses:
+        200:
+          description: OK
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+      - Environments
+      summary: Delete an environment
+      operationId: deleteEnvironment
+      responses:
+        200:
+          description: OK
+        400:
+          description: Error
+        500:
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    ImageConfig:
+      description: image configuration
+      type: object
+      properties:
+        repo:
+          example: m7-ieg-pico-test01:5000/fuhao/pineapple/env/tensorflow
+          type: string
+        tag:
+          example: 20.12-tf2-py3
+          type: string
+        source:
+          example: private
+          type: string
+    EnvironmentState:
+      description: environment state
+      type: string
+      enum:
+      - Pending
+      - Running
+      - Succeeded
+      - Failed
+      - Unknown
+    ApplicationInstanceEvent:
+      description: application instance event
+      type: object
+      properties:
+        type:
+          type: string
+        reason:
+          type: string
+        age:
+          type: string
+        from:
+          type: string
+        message:
+          type: string
+    EnvironmentRuntimeInfo:
+      description: environment runtime information
+      type: object
+      properties:
+        staticInfo:
+          $ref: '#/components/schemas/EnvironmentRuntimeStaticInfo'
+        state:
+          $ref: '#/components/schemas/EnvironmentState'
+        sshInfo:
+          $ref: '#/components/schemas/EnvironmentRuntimeSshInfo'
+        pod_name:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstanceEvent'
+    EnvironmentRuntimeSshInfo:
+      description: environment runtime ssh information
+      type: object
+      properties:
+        ssh_ip:
+          type: string
+          format: ipv4
+        ssh_port:
+          type: string
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
+    EnvironmentRuntimeStaticInfo:
+      description: environment runtime static information
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/EnvironmentName'
+        create_tm:
+          type: string
+          format: date-time
+          example: 2017-07-21 17:32:28+00:00
+        environmentConfig:
+          $ref: '#/components/schemas/EnvironmentConfig'
+        notebook_url:
+          type: string
+        description:
+          type: string
+    EnvironmentRuntimeInfos:
+      description: environment runtime information list
+      type: object
+      properties:
+        total:
+          type: integer
+        item:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvironmentRuntimeInfo'
+    EnvironmentConfig:
+      description: environment configuration
+      type: object
+      properties:
+        image:
+          $ref: '#/components/schemas/ImageConfig'
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageMapping'
+        compute_unit:
+          $ref: '#/components/schemas/ComputeUnitId'
+        ssh:
+          type: object
+          properties:
+            enable:
+              example: true
+              type: boolean
+            id_rsa.pub:
+              example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAAMfJkdGFHw+tcovIkSSk5sayb/2uid8vdcc9unEGSk74sZMJrN2yMd52sUnvdNaSp2VLVZ/CfpuKs3coKj335neyEcN4PKsv6KFywFa0DaHZ0Uzbp6k6/ThBKIi8kNQfkgKXlf2L04Z6PqgFkfRiS4gYKLSF/yZQ+VXYpnnzzCUAeLsCL7Vy1ZHSIbmx74neUxp1y8eBCN6cD9qEHW2aespg0wK2tM4dsTyb3av1FIP44wP6cOx0ZK6WhDhkIEmkvbfN/HhhF9HqCKciq/pQxyP10k3VxgcEYZUZOnlzdgUugHNOLi2oE9lGNWyPU9cl2wyE4bUV1zz4OI6wbqPL liwenhao@liwenhaodeMBP-2.4pd.io
+              type: string
+        jupyter:
+          type: object
+          properties:
+            enable:
+              example: true
+              type: boolean
+            token:
+              example: abcdefg
+              type: string
+    EnvironmentName:
+      description: environment name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    StorageMapping:
+      description: storage mapping
+      type: object
+      properties:
+        subpath:
+          type: string
+          description: relative path to user storage path
+          example: the/path/inside/user/storage/path
+        mountpath:
+          type: string
+          description: absolute path to container filesystem path
+          example: /the/path/inside/container
+  responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

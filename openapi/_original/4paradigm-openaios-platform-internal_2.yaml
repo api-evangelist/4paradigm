@@ -1,11 +1,13 @@
+# x-archived-from: 4paradigm-openaios-platform-internal.yaml
+# x-archived-on: 2026-09-16
 openapi: 3.0.3
 info:
-  title: webterminal api
-  description: webterminal api
+  title: Pineapple-internal
+  description: Pineapple internal api
   version: 0.0.1
 
 servers:
-  - url: "http://127.0.0.1:1234/web-terminal"
+  - url: "http://127.0.0.1:1234/internal-api"
 
 security:
   - OpenID:
@@ -19,46 +21,28 @@ tags:
   - name: finished
 
 paths:
-  /terminal:
-    get:
+  /releases:
+    delete:
       parameters:
         - in: query
-          name: pod
-          required: true
+          name: user
           schema:
             type: string
-          description: podName
-        - in: query
-          name: container
-          required: true
-          schema:
-            type: string
-          description: containerName
+          description: userID
       tags:
         - releases
         - finished
-      summary: Get web-terminal url
-      operationId: getTerminal
+      summary: Delete all releases
+      operationId: deleteReleases
       responses:
         200:
           description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/WebterminalInfo"
         400:
           description: Error
         500:
           $ref: "#/components/responses/ServerError"
 
 components:
-  schemas:
-    WebterminalInfo:
-      description: user login information
-      type: object
-      properties:
-        url:
-          type: string
   responses:
     ServerError:
       description: server error

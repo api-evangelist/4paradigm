@@ -1,0 +1,182 @@
+openapi: 3.2.0
+info:
+  title: Pineapple-billing Account API
+  description: Pineapple-billing
+  version: 0.0.2
+servers:
+- url: http://127.0.0.1:4321/api
+security:
+- ApiKeyAuth: []
+tags:
+- name: Account
+paths:
+  /account:
+    get:
+      tags:
+      - Account
+      summary: get account list
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountInfo'
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getAccount
+      x-operation-id-source: derived
+  /account/{userid}:
+    parameters:
+    - in: path
+      name: userid
+      schema:
+        type: string
+      description: user id
+    post:
+      tags:
+      - Account
+      summary: create user account
+      parameters:
+      - in: query
+        name: callback_url
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: balance
+        schema:
+          type: number
+          format: double
+        required: false
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: postAccountByUserid
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Account
+      summary: delete user account
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: deleteAccountByUserid
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Account
+      summary: update user account info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInfo'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: putAccountByUserid
+      x-operation-id-source: derived
+  /account/{userid}/balance:
+    parameters:
+    - in: path
+      name: userid
+      schema:
+        type: string
+      description: user id
+    get:
+      tags:
+      - Account
+      summary: get user account balance
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+                format: double
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: getAccountByUseridBalance
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Account
+      summary: modify user account balance
+      parameters:
+      - in: query
+        name: buy_balance
+        schema:
+          type: number
+          format: double
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/RequestError'
+        500:
+          $ref: '#/components/responses/ServerError'
+      operationId: postAccountByUseridBalance
+      x-operation-id-source: derived
+components:
+  responses:
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    AccountInfo:
+      type: object
+      properties:
+        userID:
+          type: string
+        balance:
+          type: number
+          format: double
+        callback_url:
+          type: string
+        computeunit_group:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
