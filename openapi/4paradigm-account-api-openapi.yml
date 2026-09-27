@@ -139,27 +139,6 @@ paths:
       operationId: postAccountByUseridBalance
       x-operation-id-source: derived
 components:
-  responses:
-    RequestError:
-      description: http request error
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              content:
-                type: object
-              message:
-                type: string
-              type:
-                type: string
-    ServerError:
-      description: server error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Something went wrong.
   schemas:
     AccountInfo:
       type: object
@@ -175,6 +154,27 @@ components:
           type: array
           items:
             type: string
+  responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

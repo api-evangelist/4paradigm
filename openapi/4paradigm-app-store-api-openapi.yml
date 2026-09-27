@@ -114,28 +114,6 @@ components:
             type: string
           example: Something went wrong.
   schemas:
-    ChartFiles:
-      description: chart files
-      type: object
-      additionalProperties:
-        type: string
-        format: byte
-    FileType:
-      description: file type for upload and Download
-      type: string
-      format: binary
-    Chart:
-      description: chart
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ChartMetadata'
-        files:
-          $ref: '#/components/schemas/ChartFiles'
-        version_list:
-          type: array
-          items:
-            type: string
     ChartMetadata:
       description: chart metadata
       type: object
@@ -152,14 +130,6 @@ components:
           type: string
         category:
           $ref: '#/components/schemas/ChartCategory'
-    ChartCategory:
-      description: chart repo category
-      type: string
-      enum:
-      - public-official
-      - public-practical
-      - public-community
-      - private
     ChartMetaDataList:
       description: chart metadata list
       type: object
@@ -168,6 +138,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChartMetadata'
+    Chart:
+      description: chart
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ChartMetadata'
+        files:
+          $ref: '#/components/schemas/ChartFiles'
+        version_list:
+          type: array
+          items:
+            type: string
+    ChartFiles:
+      description: chart files
+      type: object
+      additionalProperties:
+        type: string
+        format: byte
+    ChartCategory:
+      description: chart repo category
+      type: string
+      enum:
+      - public-official
+      - public-practical
+      - public-community
+      - private
+    FileType:
+      description: file type for upload and Download
+      type: string
+      format: binary
   securitySchemes:
     OpenID:
       type: openIdConnect

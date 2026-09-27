@@ -286,6 +286,13 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
     RequestError:
       description: http request error
       content:
@@ -299,14 +306,16 @@ components:
                 type: string
               type:
                 type: string
-    ServerError:
-      description: server error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Something went wrong.
   schemas:
+    ImageRegistryInfo:
+      description: image registry info
+      type: object
+      properties:
+        url:
+          type: string
+        id:
+          type: integer
+          format: int64
     ImageImportingInfo:
       description: import image info
       type: object
@@ -327,18 +336,13 @@ components:
           format: date-time
         importing_id:
           $ref: '#/components/schemas/ImageImportingId'
-    ImageRegistryInfo:
-      description: image registry info
-      type: object
-      properties:
-        url:
-          type: string
-        id:
-          type: integer
-          format: int64
     ImageRepo:
       description: image repo
       type: string
+    ImageImportingId:
+      description: image importing ID
+      type: integer
+      format: int64
     ProjectUserInfo:
       description: user repo info
       type: object
@@ -346,10 +350,6 @@ components:
         image_count:
           type: integer
           format: int64
-    ImageImportingId:
-      description: image importing ID
-      type: integer
-      format: int64
     ImageInfo:
       description: image info
       type: object
