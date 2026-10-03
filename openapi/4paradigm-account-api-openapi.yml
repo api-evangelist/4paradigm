@@ -139,21 +139,6 @@ paths:
       operationId: postAccountByUseridBalance
       x-operation-id-source: derived
 components:
-  schemas:
-    AccountInfo:
-      type: object
-      properties:
-        userID:
-          type: string
-        balance:
-          type: number
-          format: double
-        callback_url:
-          type: string
-        computeunit_group:
-          type: array
-          items:
-            type: string
   responses:
     ServerError:
       description: server error
@@ -175,6 +160,21 @@ components:
                 type: string
               type:
                 type: string
+  schemas:
+    AccountInfo:
+      type: object
+      properties:
+        userID:
+          type: string
+        balance:
+          type: number
+          format: double
+        callback_url:
+          type: string
+        computeunit_group:
+          type: array
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

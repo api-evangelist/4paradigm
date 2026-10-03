@@ -64,53 +64,7 @@ paths:
       operationId: postUserInit
       x-operation-id-source: derived
 components:
-  schemas:
-    ComputeUnitId:
-      description: compute unit name
-      type: string
-      example: 1c-1g
-      maxLength: 32
-    UserTaskInfo:
-      type: object
-      properties:
-        compute_unit:
-          $ref: '#/components/schemas/ComputeUnitId'
-        number:
-          type: integer
-          format: int64
-        price:
-          type: number
-          format: double
-    UserTasksInfo:
-      type: object
-      properties:
-        env_num:
-          type: integer
-          format: int64
-        app_num:
-          type: integer
-          format: int64
-        task_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserTaskInfo'
-    UserInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: John
-        balance:
-          type: number
-          format: double
   responses:
-    ServerError:
-      description: server error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Something went wrong.
     RequestError:
       description: http request error
       content:
@@ -124,6 +78,52 @@ components:
                 type: string
               type:
                 type: string
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+  schemas:
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
+    UserTasksInfo:
+      type: object
+      properties:
+        env_num:
+          type: integer
+          format: int64
+        app_num:
+          type: integer
+          format: int64
+        task_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserTaskInfo'
+    UserTaskInfo:
+      type: object
+      properties:
+        compute_unit:
+          $ref: '#/components/schemas/ComputeUnitId'
+        number:
+          type: integer
+          format: int64
+        price:
+          type: number
+          format: double
+    UserInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John
+        balance:
+          type: number
+          format: double
   securitySchemes:
     OpenID:
       type: openIdConnect

@@ -94,6 +94,90 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
+    EnvironmentName:
+      description: environment name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    EnvironmentState:
+      description: environment state
+      type: string
+      enum:
+      - Pending
+      - Running
+      - Succeeded
+      - Failed
+      - Unknown
+    ApplicationInstanceEvent:
+      description: application instance event
+      type: object
+      properties:
+        type:
+          type: string
+        reason:
+          type: string
+        age:
+          type: string
+        from:
+          type: string
+        message:
+          type: string
+    StorageMapping:
+      description: storage mapping
+      type: object
+      properties:
+        subpath:
+          type: string
+          description: relative path to user storage path
+          example: the/path/inside/user/storage/path
+        mountpath:
+          type: string
+          description: absolute path to container filesystem path
+          example: /the/path/inside/container
+    EnvironmentRuntimeInfo:
+      description: environment runtime information
+      type: object
+      properties:
+        staticInfo:
+          $ref: '#/components/schemas/EnvironmentRuntimeStaticInfo'
+        state:
+          $ref: '#/components/schemas/EnvironmentState'
+        sshInfo:
+          $ref: '#/components/schemas/EnvironmentRuntimeSshInfo'
+        pod_name:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstanceEvent'
+    ImageConfig:
+      description: image configuration
+      type: object
+      properties:
+        repo:
+          example: m7-ieg-pico-test01:5000/fuhao/pineapple/env/tensorflow
+          type: string
+        tag:
+          example: 20.12-tf2-py3
+          type: string
+        source:
+          example: private
+          type: string
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
+    EnvironmentRuntimeInfos:
+      description: environment runtime information list
+      type: object
+      properties:
+        total:
+          type: integer
+        item:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvironmentRuntimeInfo'
     EnvironmentRuntimeStaticInfo:
       description: environment runtime static information
       type: object
@@ -110,23 +194,14 @@ components:
           type: string
         description:
           type: string
-    EnvironmentName:
-      description: environment name
-      type: string
-      pattern: ^[\d\w\.-]*$
-      maxLength: 32
-    ImageConfig:
-      description: image configuration
+    EnvironmentRuntimeSshInfo:
+      description: environment runtime ssh information
       type: object
       properties:
-        repo:
-          example: m7-ieg-pico-test01:5000/fuhao/pineapple/env/tensorflow
+        ssh_ip:
           type: string
-        tag:
-          example: 20.12-tf2-py3
-          type: string
-        source:
-          example: private
+          format: ipv4
+        ssh_port:
           type: string
     EnvironmentConfig:
       description: environment configuration
@@ -158,81 +233,6 @@ components:
             token:
               example: abcdefg
               type: string
-    ComputeUnitId:
-      description: compute unit name
-      type: string
-      example: 1c-1g
-      maxLength: 32
-    EnvironmentRuntimeInfos:
-      description: environment runtime information list
-      type: object
-      properties:
-        total:
-          type: integer
-        item:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnvironmentRuntimeInfo'
-    StorageMapping:
-      description: storage mapping
-      type: object
-      properties:
-        subpath:
-          type: string
-          description: relative path to user storage path
-          example: the/path/inside/user/storage/path
-        mountpath:
-          type: string
-          description: absolute path to container filesystem path
-          example: /the/path/inside/container
-    EnvironmentRuntimeInfo:
-      description: environment runtime information
-      type: object
-      properties:
-        staticInfo:
-          $ref: '#/components/schemas/EnvironmentRuntimeStaticInfo'
-        state:
-          $ref: '#/components/schemas/EnvironmentState'
-        sshInfo:
-          $ref: '#/components/schemas/EnvironmentRuntimeSshInfo'
-        pod_name:
-          type: string
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationInstanceEvent'
-    EnvironmentRuntimeSshInfo:
-      description: environment runtime ssh information
-      type: object
-      properties:
-        ssh_ip:
-          type: string
-          format: ipv4
-        ssh_port:
-          type: string
-    ApplicationInstanceEvent:
-      description: application instance event
-      type: object
-      properties:
-        type:
-          type: string
-        reason:
-          type: string
-        age:
-          type: string
-        from:
-          type: string
-        message:
-          type: string
-    EnvironmentState:
-      description: environment state
-      type: string
-      enum:
-      - Pending
-      - Running
-      - Succeeded
-      - Failed
-      - Unknown
   responses:
     ServerError:
       description: server error

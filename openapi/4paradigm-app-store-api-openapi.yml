@@ -92,6 +92,61 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
 components:
+  schemas:
+    ChartMetaDataList:
+      description: chart metadata list
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChartMetadata'
+    Chart:
+      description: chart
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ChartMetadata'
+        files:
+          $ref: '#/components/schemas/ChartFiles'
+        version_list:
+          type: array
+          items:
+            type: string
+    ChartMetadata:
+      description: chart metadata
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        url:
+          type: string
+        icon_link:
+          type: string
+        category:
+          $ref: '#/components/schemas/ChartCategory'
+    FileType:
+      description: file type for upload and Download
+      type: string
+      format: binary
+    ChartFiles:
+      description: chart files
+      type: object
+      additionalProperties:
+        type: string
+        format: byte
+    ChartCategory:
+      description: chart repo category
+      type: string
+      enum:
+      - public-official
+      - public-practical
+      - public-community
+      - private
   responses:
     RequestError:
       description: http request error
@@ -113,61 +168,6 @@ components:
           schema:
             type: string
           example: Something went wrong.
-  schemas:
-    ChartMetadata:
-      description: chart metadata
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        version:
-          type: string
-        url:
-          type: string
-        icon_link:
-          type: string
-        category:
-          $ref: '#/components/schemas/ChartCategory'
-    ChartMetaDataList:
-      description: chart metadata list
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChartMetadata'
-    Chart:
-      description: chart
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ChartMetadata'
-        files:
-          $ref: '#/components/schemas/ChartFiles'
-        version_list:
-          type: array
-          items:
-            type: string
-    ChartFiles:
-      description: chart files
-      type: object
-      additionalProperties:
-        type: string
-        format: byte
-    ChartCategory:
-      description: chart repo category
-      type: string
-      enum:
-      - public-official
-      - public-practical
-      - public-community
-      - private
-    FileType:
-      description: file type for upload and Download
-      type: string
-      format: binary
   securitySchemes:
     OpenID:
       type: openIdConnect

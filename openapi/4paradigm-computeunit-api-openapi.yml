@@ -147,19 +147,6 @@ paths:
       operationId: getComputeunitPrice
       x-operation-id-source: derived
 components:
-  schemas:
-    ComputeunitInfo:
-      type: object
-      properties:
-        id:
-          type: string
-        price:
-          type: number
-          format: double
-        description:
-          type: string
-        spec:
-          type: object
   responses:
     ServerError:
       description: server error
@@ -181,6 +168,19 @@ components:
                 type: string
               type:
                 type: string
+  schemas:
+    ComputeunitInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        price:
+          type: number
+          format: double
+        description:
+          type: string
+        spec:
+          type: object
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
