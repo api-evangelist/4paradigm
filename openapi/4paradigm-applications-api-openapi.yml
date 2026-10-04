@@ -178,36 +178,6 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
-    ApplicationInstanceMetadata:
-      description: application instance
-      type: object
-      properties:
-        instance_name:
-          type: string
-        chart_name:
-          type: string
-        chart_version:
-          type: string
-        create_tm:
-          type: string
-          format: date-time
-          example: 2017-07-21 17:32:28+00:00
-        status:
-          type: string
-    ApplicationInstanceEvent:
-      description: application instance event
-      type: object
-      properties:
-        type:
-          type: string
-        reason:
-          type: string
-        age:
-          type: string
-        from:
-          type: string
-        message:
-          type: string
     ApplicationInstanceService:
       description: application instance pod
       type: object
@@ -235,33 +205,16 @@ components:
                 type: string
               protocol:
                 type: string
-    ApplicationConfig:
-      description: metadata to create an application instance
+    ApplicationInstanceServiceList:
+      description: application instance service list
       type: object
       properties:
-        url:
-          type: string
-        answers:
-          type: object
-    ApplicationInstanceContainer:
-      description: application instance container
-      type: object
-      properties:
-        name:
-          type: string
-        image:
-          type: string
-        state:
-          type: string
-        ports:
+        total:
+          type: integer
+        item:
           type: array
           items:
-            type: object
-            properties:
-              container_port:
-                type: string
-              protocol:
-                type: string
+            $ref: '#/components/schemas/ApplicationInstanceService'
     ApplicationList:
       description: application instance list
       type: object
@@ -292,16 +245,6 @@ components:
           type: string
           format: date-time
           example: 2017-07-21 17:32:28+00:00
-    ApplicationInstanceServiceList:
-      description: application instance service list
-      type: object
-      properties:
-        total:
-          type: integer
-        item:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationInstanceService'
     ApplicationInstancePodList:
       description: application instance pod list
       type: object
@@ -312,6 +255,63 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApplicationInstancePod'
+    ApplicationConfig:
+      description: metadata to create an application instance
+      type: object
+      properties:
+        url:
+          type: string
+        answers:
+          type: object
+    ApplicationInstanceContainer:
+      description: application instance container
+      type: object
+      properties:
+        name:
+          type: string
+        image:
+          type: string
+        state:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              container_port:
+                type: string
+              protocol:
+                type: string
+    ApplicationInstanceEvent:
+      description: application instance event
+      type: object
+      properties:
+        type:
+          type: string
+        reason:
+          type: string
+        age:
+          type: string
+        from:
+          type: string
+        message:
+          type: string
+    ApplicationInstanceMetadata:
+      description: application instance
+      type: object
+      properties:
+        instance_name:
+          type: string
+        chart_name:
+          type: string
+        chart_version:
+          type: string
+        create_tm:
+          type: string
+          format: date-time
+          example: 2017-07-21 17:32:28+00:00
+        status:
+          type: string
   responses:
     ServerError:
       description: server error

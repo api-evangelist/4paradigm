@@ -92,15 +92,42 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
 components:
+  responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
   schemas:
-    ChartMetaDataList:
-      description: chart metadata list
+    ChartFiles:
+      description: chart files
       type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChartMetadata'
+      additionalProperties:
+        type: string
+        format: byte
+    ChartCategory:
+      description: chart repo category
+      type: string
+      enum:
+      - public-official
+      - public-practical
+      - public-community
+      - private
     Chart:
       description: chart
       type: object
@@ -113,6 +140,18 @@ components:
           type: array
           items:
             type: string
+    FileType:
+      description: file type for upload and Download
+      type: string
+      format: binary
+    ChartMetaDataList:
+      description: chart metadata list
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChartMetadata'
     ChartMetadata:
       description: chart metadata
       type: object
@@ -129,45 +168,6 @@ components:
           type: string
         category:
           $ref: '#/components/schemas/ChartCategory'
-    FileType:
-      description: file type for upload and Download
-      type: string
-      format: binary
-    ChartFiles:
-      description: chart files
-      type: object
-      additionalProperties:
-        type: string
-        format: byte
-    ChartCategory:
-      description: chart repo category
-      type: string
-      enum:
-      - public-official
-      - public-practical
-      - public-community
-      - private
-  responses:
-    RequestError:
-      description: http request error
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              content:
-                type: object
-              message:
-                type: string
-              type:
-                type: string
-    ServerError:
-      description: server error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Something went wrong.
   securitySchemes:
     OpenID:
       type: openIdConnect

@@ -149,36 +149,8 @@ components:
             type: string
           example: Something went wrong.
   schemas:
-    ContainerName:
-      description: container name
-      type: string
-      pattern: ^[\d\w\.-]*$
-      maxLength: 32
-    LongDescription:
-      description: long description including newlines
-      type: string
-    ServiceName:
-      description: service name
-      type: string
-      pattern: ^[\d\w\.-]*$
-      maxLength: 32
     ChartName:
       description: chart name
-      type: string
-      pattern: ^[\d\w\.-]*$
-      maxLength: 32
-    KubernetesContainer:
-      description: container schema
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/ContainerName'
-        state:
-          $ref: '#/components/schemas/ContainerState'
-        image:
-          $ref: '#/components/schemas/ImageName'
-    ReleaseName:
-      description: release name
       type: string
       pattern: ^[\d\w\.-]*$
       maxLength: 32
@@ -199,26 +171,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/KubernetesContainer'
-    ContainerState:
+    PodName:
+      description: pod name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    PodState:
       type: string
     ImageName:
       description: image name
       type: string
       pattern: ^[\d\w\.-]*$
       maxLength: 64
-    ShortDescription:
-      description: short description excluding newlines
-      type: string
-    ComputeUnitId:
-      description: compute unit name
-      type: string
-      example: 1c-1g
-      maxLength: 32
-    PodName:
-      description: pod name
-      type: string
-      pattern: ^[\d\w\.-]*$
-      maxLength: 32
     KubernetesService:
       description: service schema
       type: object
@@ -234,6 +198,16 @@ components:
         node_port:
           type: string
           format: port
+    ServiceName:
+      description: service name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
     ReleaseCreateConfig:
       description: metadata to create a release
       type: object
@@ -246,7 +220,33 @@ components:
           description: utf-8 encoded value.yaml file
           type: string
           format: binary
-    PodState:
+    LongDescription:
+      description: long description including newlines
+      type: string
+    KubernetesContainer:
+      description: container schema
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ContainerName'
+        state:
+          $ref: '#/components/schemas/ContainerState'
+        image:
+          $ref: '#/components/schemas/ImageName'
+    ReleaseName:
+      description: release name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    ContainerName:
+      description: container name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    ShortDescription:
+      description: short description excluding newlines
+      type: string
+    ContainerState:
       type: string
     WebterminalInfo:
       description: user login information

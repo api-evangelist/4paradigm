@@ -134,6 +134,13 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
     RequestError:
       description: http request error
       content:
@@ -147,22 +154,7 @@ components:
                 type: string
               type:
                 type: string
-    ServerError:
-      description: server error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Something went wrong.
   schemas:
-    FileType:
-      description: file type for upload and Download
-      type: string
-      format: binary
-    PosixPath:
-      description: posix path for directory or file
-      type: string
-      maxLength: 256
     FileInfo:
       description: file or directory info
       type: object
@@ -176,6 +168,14 @@ components:
         modification_time:
           type: string
           format: date-time
+    PosixPath:
+      description: posix path for directory or file
+      type: string
+      maxLength: 256
+    FileType:
+      description: file type for upload and Download
+      type: string
+      format: binary
   securitySchemes:
     OpenID:
       type: openIdConnect
