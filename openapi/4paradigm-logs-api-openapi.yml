@@ -53,6 +53,17 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
 components:
+  schemas:
+    ContainerName:
+      description: container name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
+    PodName:
+      description: pod name
+      type: string
+      pattern: ^[\d\w\.-]*$
+      maxLength: 32
   responses:
     ServerError:
       description: server error
@@ -74,17 +85,6 @@ components:
                 type: string
               type:
                 type: string
-  schemas:
-    ContainerName:
-      description: container name
-      type: string
-      pattern: ^[\d\w\.-]*$
-      maxLength: 32
-    PodName:
-      description: pod name
-      type: string
-      pattern: ^[\d\w\.-]*$
-      maxLength: 32
   securitySchemes:
     OpenID:
       type: openIdConnect

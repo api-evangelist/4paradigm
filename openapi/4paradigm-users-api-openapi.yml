@@ -64,33 +64,7 @@ paths:
       operationId: postUserInit
       x-operation-id-source: derived
 components:
-  responses:
-    ServerError:
-      description: server error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Something went wrong.
-    RequestError:
-      description: http request error
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              content:
-                type: object
-              message:
-                type: string
-              type:
-                type: string
   schemas:
-    ComputeUnitId:
-      description: compute unit name
-      type: string
-      example: 1c-1g
-      maxLength: 32
     UserTasksInfo:
       type: object
       properties:
@@ -113,6 +87,11 @@ components:
         balance:
           type: number
           format: double
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
     UserTaskInfo:
       type: object
       properties:
@@ -124,6 +103,27 @@ components:
         price:
           type: number
           format: double
+  responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
+    RequestError:
+      description: http request error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: object
+              message:
+                type: string
+              type:
+                type: string
   securitySchemes:
     OpenID:
       type: openIdConnect

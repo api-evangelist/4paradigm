@@ -146,11 +146,6 @@ components:
               type:
                 type: string
   schemas:
-    ComputeUnitId:
-      description: compute unit name
-      type: string
-      example: 1c-1g
-      maxLength: 32
     ComputeUnitSpec:
       description: compute unit spec
       type: object
@@ -168,6 +163,11 @@ components:
           example: 15.0
         description:
           type: string
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
     CompetitionInfo:
       type: object
       properties:

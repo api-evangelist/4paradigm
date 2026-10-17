@@ -93,33 +93,23 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
 components:
-  responses:
-    ServerError:
-      description: server error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Something went wrong.
   schemas:
-    EnvironmentRuntimeSshInfo:
-      description: environment runtime ssh information
+    EnvironmentRuntimeInfo:
+      description: environment runtime information
       type: object
       properties:
-        ssh_ip:
+        staticInfo:
+          $ref: '#/components/schemas/EnvironmentRuntimeStaticInfo'
+        state:
+          $ref: '#/components/schemas/EnvironmentState'
+        sshInfo:
+          $ref: '#/components/schemas/EnvironmentRuntimeSshInfo'
+        pod_name:
           type: string
-          format: ipv4
-        ssh_port:
-          type: string
-    EnvironmentState:
-      description: environment state
-      type: string
-      enum:
-      - Pending
-      - Running
-      - Succeeded
-      - Failed
-      - Unknown
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationInstanceEvent'
     EnvironmentRuntimeInfos:
       description: environment runtime information list
       type: object
@@ -130,16 +120,76 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EnvironmentRuntimeInfo'
-    ComputeUnitId:
-      description: compute unit name
+    EnvironmentRuntimeStaticInfo:
+      description: environment runtime static information
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/EnvironmentName'
+        create_tm:
+          type: string
+          format: date-time
+          example: 2017-07-21 17:32:28+00:00
+        environmentConfig:
+          $ref: '#/components/schemas/EnvironmentConfig'
+        notebook_url:
+          type: string
+        description:
+          type: string
+    EnvironmentState:
+      description: environment state
       type: string
-      example: 1c-1g
-      maxLength: 32
+      enum:
+      - Pending
+      - Running
+      - Succeeded
+      - Failed
+      - Unknown
     EnvironmentName:
       description: environment name
       type: string
       pattern: ^[\d\w\.-]*$
       maxLength: 32
+    ApplicationInstanceEvent:
+      description: application instance event
+      type: object
+      properties:
+        type:
+          type: string
+        reason:
+          type: string
+        age:
+          type: string
+        from:
+          type: string
+        message:
+          type: string
+    EnvironmentRuntimeSshInfo:
+      description: environment runtime ssh information
+      type: object
+      properties:
+        ssh_ip:
+          type: string
+          format: ipv4
+        ssh_port:
+          type: string
+    ComputeUnitId:
+      description: compute unit name
+      type: string
+      example: 1c-1g
+      maxLength: 32
+    StorageMapping:
+      description: storage mapping
+      type: object
+      properties:
+        subpath:
+          type: string
+          description: relative path to user storage path
+          example: the/path/inside/user/storage/path
+        mountpath:
+          type: string
+          description: absolute path to container filesystem path
+          example: /the/path/inside/container
     ImageConfig:
       description: image configuration
       type: object
@@ -183,64 +233,14 @@ components:
             token:
               example: abcdefg
               type: string
-    StorageMapping:
-      description: storage mapping
-      type: object
-      properties:
-        subpath:
-          type: string
-          description: relative path to user storage path
-          example: the/path/inside/user/storage/path
-        mountpath:
-          type: string
-          description: absolute path to container filesystem path
-          example: /the/path/inside/container
-    ApplicationInstanceEvent:
-      description: application instance event
-      type: object
-      properties:
-        type:
-          type: string
-        reason:
-          type: string
-        age:
-          type: string
-        from:
-          type: string
-        message:
-          type: string
-    EnvironmentRuntimeStaticInfo:
-      description: environment runtime static information
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/EnvironmentName'
-        create_tm:
-          type: string
-          format: date-time
-          example: 2017-07-21 17:32:28+00:00
-        environmentConfig:
-          $ref: '#/components/schemas/EnvironmentConfig'
-        notebook_url:
-          type: string
-        description:
-          type: string
-    EnvironmentRuntimeInfo:
-      description: environment runtime information
-      type: object
-      properties:
-        staticInfo:
-          $ref: '#/components/schemas/EnvironmentRuntimeStaticInfo'
-        state:
-          $ref: '#/components/schemas/EnvironmentState'
-        sshInfo:
-          $ref: '#/components/schemas/EnvironmentRuntimeSshInfo'
-        pod_name:
-          type: string
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationInstanceEvent'
+  responses:
+    ServerError:
+      description: server error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Something went wrong.
   securitySchemes:
     OpenID:
       type: openIdConnect

@@ -293,9 +293,22 @@ components:
     ImageRepo:
       description: image repo
       type: string
-    ImageTag:
-      description: image tag
-      type: string
+    ProjectUserInfo:
+      description: user repo info
+      type: object
+      properties:
+        image_count:
+          type: integer
+          format: int64
+    ImageRegistryInfo:
+      description: image registry info
+      type: object
+      properties:
+        url:
+          type: string
+        id:
+          type: integer
+          format: int64
     ImageInfo:
       description: image info
       type: object
@@ -313,13 +326,6 @@ components:
         importing_time:
           type: string
           format: date-time
-    ProjectUserInfo:
-      description: user repo info
-      type: object
-      properties:
-        image_count:
-          type: integer
-          format: int64
     ImageImportingInfo:
       description: import image info
       type: object
@@ -340,15 +346,9 @@ components:
           format: date-time
         importing_id:
           $ref: '#/components/schemas/ImageImportingId'
-    ImageRegistryInfo:
-      description: image registry info
-      type: object
-      properties:
-        url:
-          type: string
-        id:
-          type: integer
-          format: int64
+    ImageTag:
+      description: image tag
+      type: string
   responses:
     ServerError:
       description: server error
