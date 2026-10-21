@@ -1,0 +1,24 @@
+generated: '2026-10-20'
+method: searched
+checked:
+- jetbrains/integrations/jetbrains-integration-edges.yml
+source:
+- jetbrains/integrations/jetbrains-integration-edges.yml
+edges:
+- partner_name: JetBrains (jetbrains-marketplace)
+  partner: jetbrains
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: jetbrains-marketplace
+  evidence: https://plugins.jetbrains.com/vendor/fea449f6-1999-4d1f-8d63-82653184260a
+  mirror_of: jetbrains/integrations/jetbrains-integration-edges.yml
+  apps:
+  - 4Paradigm AIGS CodeX
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: IDE / developer extension marketplace listing
