@@ -111,6 +111,12 @@ OpenAPI overlays, including conversational phrasing for each operation.
 - [4Paradigm Openaios Platform Overlay](https://apis.io/overlays/4paradigm/4paradigm-openaios-platform-overlay/)
 - [4Paradigm Openaios Webterminal Overlay](https://apis.io/overlays/4paradigm/4paradigm-openaios-webterminal-overlay/)
 
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [4Paradigm API Rules](https://apis.io/rules/4paradigm/4paradigm-rules/)
+
 #### Security (2)
 
 Authentication, trust centre, and vulnerability disclosure.
@@ -146,18 +152,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 36.0** — thin · rubric 0.24.0 · scored 2026-10-17
+**Kin Score 39.3** — developing · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 68.3 |
 | Contract quality | 43.7 |
-| Contract governance | 4.5 |
-| Operational transparency | 18.4 |
+| Contract governance | 18.2 |
+| Operational transparency | 19.0 |
 | Developer ergonomics | 60.1 |
-| Access clarity | 15.8 |
+| Access clarity | 27.7 |
 
-**Agent readiness 25.2** — agent-aware
+**Agent readiness 30.0** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -167,7 +173,7 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | MCP Server | documented (partial credit) |
 | Auth Clarity | bearer (partial credit) |
 | Idempotency | — |
-| Error Semantics | derived (partial credit) |
+| Error Semantics | verified |
 | OpenAPI Examples | — |
 | Rate Limit Signal | documented (partial credit) |
 | Event Surface Described | — |
@@ -180,8 +186,14 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Protected Resource Metadata | — |
 | Dynamic Client Registration | — |
 | Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
-**Regulatory alignment 20.9** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/4paradigm/](https://apis.io/providers/4paradigm/).
 
